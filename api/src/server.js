@@ -58,6 +58,15 @@ class App {
 
   async initialiseTables() {
 
+    await this.pg.schema.dropTableIfExists('users').then(console.log("dropped users"));
+    await this.pg.schema.dropTableIfExists('character').then(console.log("dropped character"));;
+    await this.pg.schema.dropTableIfExists('tokens').then(console.log("dropped tokens"));;
+    await this.pg.schema.dropTableIfExists('encounter').then(console.log("dropped encounter"));;
+    await this.pg.schema.dropTableIfExists('encounter_part').then(console.log("dropped encounter part"));;
+    await this.pg.schema.dropTableIfExists('encounter_action').then(console.log("dropped encounter action"));;
+    await this.pg.schema.dropTableIfExists('combat').then(console.log("dropped combat"));;
+    await this.pg.schema.dropTableIfExists('combat_part').then(console.log("dropped combat part"));;
+
     await this.pg.schema.createTableIfNotExists('users', function (table) {
       table.increments();
       table.uuid("uuid");
@@ -69,8 +78,6 @@ class App {
       console.log("created users")
     });
 
-
-
     // await this.pg.schema.createTableIfNotExists('tokens', function (table) {
     //   table.increments();
     //   table.timestamps(true, true);
@@ -80,6 +87,78 @@ class App {
     // }).then(function() {
     //   console.log("created tokens")
     // });
+
+    await this.pg.schema.createTableIfNotExists('character', function (table){
+      table.increments();
+      table.uuid("uuid");
+      table.string("attack");
+      table.string("hp");
+      table.string("defense");
+      table.string("image_uuid");
+      table.string("weapons");
+      table.timestamps(true, true);
+    }).then(function () {
+      console.log("created character");
+    });
+
+    await this.pg.schema.createTableIfNotExists('encounter', function (table){
+      table.increments();
+      table.uuid("uuid");
+      table.string("character_uuid");
+      table.string("description");
+      table.string("start_part_uuid");
+      table.timestamps(true, true);
+    }).then(function () {
+      console.log("created Encounter");
+    });
+
+    await this.pg.schema.createTableIfNotExists('encounter_part', function (table){
+      table.increments();
+      table.uuid("uuid");
+      table.string("encounter_uuid");
+      table.string("story_text");
+      table.string("description");
+      table.string("combat_uuid");
+      table.string("encounter_part_uuid");
+      table.timestamps(true, true);
+    }).then(function () {
+      console.log("created encounter part");
+    });
+
+    await this.pg.schema.createTableIfNotExists('encounter_action', function (table){
+      table.increments();
+      table.uuid("uuid");
+      table.string("encounter_part_uuid");
+      table.string("start_uuid");
+      table.string("story_text");
+      table.timestamps(true, true);
+    }).then(function () {
+      console.log("created encounter action");
+    });
+
+    await this.pg.schema.createTableIfNotExists('combat', function (table){
+      table.increments();
+      table.uuid("uuid");
+      table.string("character_uuid");
+      table.string("description");
+      table.string("start_part_uuid");
+      table.timestamps(true, true);
+    }).then(function () {
+      console.log("created encounter action");
+    });
+
+    await this.pg.schema.createTableIfNotExists('combat_part', function (table){
+      table.increments();
+      table.uuid("uuid");
+      table.string("story_text");
+      table.string("description");
+      table.string("combat_part_uuid");
+      table.string("encounter_uuid");
+      table.timestamps(true, true);
+    }).then(function () {
+      console.log("created encounter part");
+    });
+    
   }
 }
 module.exports = App;
