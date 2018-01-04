@@ -8,7 +8,7 @@
     "start:dev": "nodemon src/index.js",
     "test": "mocha tests"
   },
-  "author": "Jan Everaert",
+  "author": "Ruben Hannon",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",

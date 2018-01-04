@@ -15,7 +15,7 @@ import logger from './js/logger';
 
 import LandingApp from './js/Component/Landing/LandingApp'
 import NoMatch from './js/Component/General/NoMatch'
-import FeedApp from './js/Component/Feed/FeedApp'
+import StoryApp from './js/Component/Story/StoryApp';
 
 const history = createBrowserHistory();
 logger('foo');
@@ -28,7 +28,7 @@ const loggerMiddleWare = createLogger({
 ReactDOM.render(
     <Router history={history}>
       <div>
-        <Route path="/" component={LandingApp} />
+        <Route path="/" component={StoryApp} />
       </div>
     </Router>,
   document.getElementById('root')

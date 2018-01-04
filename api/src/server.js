@@ -58,14 +58,14 @@ class App {
 
   async initialiseTables() {
 
-    await this.pg.schema.dropTableIfExists('users').then(console.log("dropped users"));
-    await this.pg.schema.dropTableIfExists('character').then(console.log("dropped character"));;
-    await this.pg.schema.dropTableIfExists('tokens').then(console.log("dropped tokens"));;
-    await this.pg.schema.dropTableIfExists('encounter').then(console.log("dropped encounter"));;
-    await this.pg.schema.dropTableIfExists('encounter_part').then(console.log("dropped encounter part"));;
-    await this.pg.schema.dropTableIfExists('encounter_action').then(console.log("dropped encounter action"));;
-    await this.pg.schema.dropTableIfExists('combat').then(console.log("dropped combat"));;
-    await this.pg.schema.dropTableIfExists('combat_part').then(console.log("dropped combat part"));;
+    // await this.pg.schema.dropTableIfExists('users').then(console.log("dropped users"));
+    // await this.pg.schema.dropTableIfExists('character').then(console.log("dropped character"));
+    // await this.pg.schema.dropTableIfExists('tokens').then(console.log("dropped tokens"));
+    // await this.pg.schema.dropTableIfExists('encounter').then(console.log("dropped encounter"));
+    // await this.pg.schema.dropTableIfExists('encounter_part').then(console.log("dropped encounter part"));
+    // await this.pg.schema.dropTableIfExists('encounter_action').then(console.log("dropped encounter action"));
+    // await this.pg.schema.dropTableIfExists('combat').then(console.log("dropped combat"));
+    // await this.pg.schema.dropTableIfExists('combat_part').then(console.log("dropped combat part"));
 
     await this.pg.schema.createTableIfNotExists('users', function (table) {
       table.increments();
@@ -144,7 +144,7 @@ class App {
       table.string("start_part_uuid");
       table.timestamps(true, true);
     }).then(function () {
-      console.log("created encounter action");
+      console.log("created combat");
     });
 
     await this.pg.schema.createTableIfNotExists('combat_part', function (table){
@@ -156,7 +156,7 @@ class App {
       table.string("encounter_uuid");
       table.timestamps(true, true);
     }).then(function () {
-      console.log("created encounter part");
+      console.log("created combat part");
     });
     
   }
