@@ -1,23 +1,28 @@
 import React, { Component } from 'react'
 import { css } from 'glamor'
+
 import { Router, Route } from 'react-router'
 
+import InitStory from './Create/InitStory'
 import Introduction from './Introduction'
-import CreateEncounter from './Create/CreateEncounter'
+import Banner from './Banner'
+
+const Container = css({
+});
 
 const StoryCreaterContainer = css({
   width:  '100%',
-  height: '500px',
-  backgroundColor: '#eee'
-})
+  backgroundColor: '#eee',
+  boxSizing: 'border-box'
+});
 
 class StoryApp extends Component {
   render() {
     return (
-      <div>
-        <Introduction />
+      <div {...Container}>
+        <Banner />
         <div {...StoryCreaterContainer}>
-          <Route path={'/'} exact component={CreateEncounter} />
+          <Route path={'/'} exact component={InitStory} />
         </div>
       </div>
     )

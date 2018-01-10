@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { css } from 'glamor';
 
 const container = css({
-  width: '500px',
+  width: '100%',
   marginTop: '50px',
-  marginLeft: 'calc(50% - 250px)',
+  marginLeft: 'auto',
+  padding: '20px',
+  boxSizing: 'border-box',
   fontFamily: 'sans-serif',
   '> h1': {
     fontSize: '20px',
@@ -12,11 +14,12 @@ const container = css({
   },
   '> p': {
     fontSize: '14px',
-    lineHeight: '20px'
+    lineHeight: '20px',
+    textAlign: 'justify'
   }
 })
 
-class MVPExpl extends Component {
+class Introduction extends Component {
   render() {
     return (
       <div {...container}>
@@ -29,4 +32,4 @@ class MVPExpl extends Component {
   }
 }
 
-export default MVPExpl
+export default Introduction
