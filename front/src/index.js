@@ -9,6 +9,7 @@ import { Router, Route } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+import './css/style.css';
 
 import logger from './js/logger';
 

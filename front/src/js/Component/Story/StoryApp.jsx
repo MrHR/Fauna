@@ -12,7 +12,6 @@ const Container = css({
 
 const StoryCreaterContainer = css({
   width:  '100%',
-  backgroundColor: '#eee',
   boxSizing: 'border-box'
 });
 

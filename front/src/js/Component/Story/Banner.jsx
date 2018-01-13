@@ -3,18 +3,16 @@ import { css } from 'glamor';
 
 const container = css({
     padding:'20px',
-    backgroundColor: '#563593',
     '> h1' : {
       fontSize: '1.5em',
-      color: '#fff',
-      fontFamily: 'Helvetica'
+      color: '#fff'
     }
 });
 
 class Banner extends Component {
   render() {
     return (
-      <div {...container}>
+      <div {...container} className="banner">
         <h1>Story Title</h1>
       </div> 
     )
