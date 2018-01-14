@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { css } from 'glamor';
 import { Link } from 'react-router-dom';
 
-const textarea = css({
-    minHeight:'100px'
-});
-
 class InitStory extends Component {
     constructor(props) {
         super(props);
@@ -38,30 +34,11 @@ class InitStory extends Component {
             <div className="page">
                 <h2>Create a Story</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <input 
-                        type="text" 
-                        name="title"
-                        value={this.state.title} 
-                        onChange={this.handleCange} 
-                        placeholder="Title" 
-                    />
-    
-                    <textarea 
-                        {...textarea}
-                        name="description"
-                        value={this.state.description} 
-                        onChange={this.handleCange} 
-                        placeholder="Description" 
-                    />
-    
                     <input
                         className="button"
                         type="submit"
-                        value="Start"                    
+                        value="+"                    
                     />
-
-                    <Link to={'/Create'}>Go create a story</Link>
-    
                 </form>
             </div>     
         )

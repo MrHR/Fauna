@@ -4,6 +4,7 @@ import { css } from 'glamor'
 import { Router, Route } from 'react-router'
 
 import InitStory from './Create/InitStory'
+import CreateStory from './Create/CreateStory'
 import Introduction from './Introduction'
 import Banner from './Banner'
 
@@ -22,6 +23,7 @@ class StoryApp extends Component {
         <Banner />
         <div {...StoryCreaterContainer}>
           <Route path={'/'} exact component={InitStory} />
+          <Route path={'/Create'} exact component={CreateStory} />
         </div>
       </div>
     )
