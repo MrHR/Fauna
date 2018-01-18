@@ -10,6 +10,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import './css/style.css';
+import filter from './js/functions/functions';
 
 import logger from './js/logger';
 
