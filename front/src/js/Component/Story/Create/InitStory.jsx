@@ -54,14 +54,14 @@ class InitStory extends Component {
                         placeholder="Description" 
                     />
     
-                    <input
+                    {/* <input
                         className="button"
                         type="submit"
                         value="Start"                    
-                    />
-
-                    <Link to={'/Create'}>Go create a story</Link>
-    
+                    /> */}
+                    
+                    <Link to={'/Create'} className="button">Start</Link>
+                
                 </form>
             </div>     
         )

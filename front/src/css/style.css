@@ -16,7 +16,6 @@ h2 {
 
 form {
     box-sizing: border-box;
-    position:relative;
 }
 
 input, textarea {
@@ -33,10 +32,13 @@ form input, form textarea {
     box-sizing:border-box;
     display:block;
     padding:10px;
-    border-radius:5px;
+    /* border-radius:5px; */
     margin:10px 0;
     color:white;
     position:relative;
+    resize: none;
+    font-size:0.8em;
+    width:100%;
 }
 
 form input:focus, form textarea:focus {
@@ -48,14 +50,28 @@ form input:focus, form textarea:focus {
     background-color:rgb(55, 212, 152);
     color:white;
     font-size:0.9em;
+    cursor: pointer;
+    box-sizing:border-box;
+    display:block;
+    padding:10px;
+    /* border-radius:5px; */
+    border: none;
+    margin:10px 0;
+    color:white;
+    text-align: center;
+    text-decoration: none;
+    width:100%;
 }
 
 .page {
-    padding:20px;
+    padding:20px 20px 100px 20px;
+    position:relative;
+    max-width:800px;
+    margin:0 auto;
 }
 
 @media only screen and (max-width:950px) {
-    form input, form textarea {
-        width:100%;
+    html, body {
+        font-size:110%;
     }
 }
