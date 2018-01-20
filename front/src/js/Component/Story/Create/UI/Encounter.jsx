@@ -2,8 +2,26 @@ import React, { Component } from 'react';
 import { css } from 'glamor';
 import { Link } from 'react-router-dom';
 
+import HorizontalScroll from '../UI/HorizontalScroll';
+
 const textarea = css({
     minHeight:'200px'
+});
+
+const addEncounterActionButton = css({
+    background: 'rgb(58, 58, 58)',
+    width: '100%',
+    height:'60px',
+    lineHeight: '60px',
+    textAlign: 'center',
+    color: '#bbb',
+    cursor:'pointer',
+    fontSize: '1em',
+    '> a' : {
+        color:'white',
+        textDecoration: 'none',
+        cursor:'pointer'
+    }
 });
 
 class Encounter extends Component {
@@ -13,12 +31,12 @@ class Encounter extends Component {
         this.state = {
             id: props.id,
             encounter: '',
-            placeholder: props.placeholder
+            placeholder: props.placeholder,
+            encounterActions: props.encounterActions
         };
 
         this.handleCange = this.handleCange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
     }
 
     handleCange(event) {
@@ -36,7 +54,6 @@ class Encounter extends Component {
     }
 
     render () {
-
         return(
             <div>
                 <textarea 
@@ -47,7 +64,13 @@ class Encounter extends Component {
                     placeholder={this.state.placeholder} 
                 />
 
-                {this.props.children}
+                <HorizontalScroll columnWidth={'100px'}>
+                    {this.props.children}
+
+                    <div {...addEncounterActionButton}>
+                        <Link to={`/create/add/encounteraction/${this.state.id}`}>+</Link>
+                    </div>
+                </HorizontalScroll>
             </div>
         )
     }

@@ -19,8 +19,8 @@ const StoryCreaterContainer = css({
 });
 
 class StoryApp extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = ({
       encounterActions: []
     });
@@ -32,6 +32,8 @@ class StoryApp extends Component {
   addEncounterAction(encounterActionValues) {
     this.setState((prevState, props) => {
       const arrayPrevState = prevState.encounterActions;
+      console.log('state', this.state.encounterActions);
+
       return {
         encounterActions: [...arrayPrevState, encounterActionValues]
       }

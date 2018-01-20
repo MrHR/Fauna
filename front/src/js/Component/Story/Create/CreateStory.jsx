@@ -7,9 +7,9 @@ import Encounter from './UI/Encounter';
 import Filter from '../../../functions/functions';
 import { returnRandomArrayValue } from '../../../functions/functions';
 import AddEncounterAction from './AddEncounterAction';
-import HorizontalScroll from './UI/HorizontalScroll';
 import StoryApp from '../StoryApp';
 import StoryOptions from '../Create/UI/popups/StoryOptions';
+import EncounterAction from './UI/EncounterAction';
 
 const encPlaceholder = [
     "Surrounded by blossoming apple trees, the petals lightly rustling in the wind, Jhon continued...",
@@ -24,29 +24,12 @@ const addButton = css({
     maxWidth: '800px'
 });
 
-const actionTumb = css({
-    background: 'rgb(58, 58, 58)',
-    width: '100%',
-    height:'60px',
-    lineHeight: '60px',
-    textAlign: 'center',
-    color: '#bbb',
-    fontSize: '1em',
-    '> a' : {
-        color:'white',
-        textDecoration: 'none',
-        cursor:'pointer'
-    }
-});
-
-const parent = css({
-    height:'60px'
-});
 
 class InitStory extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: 1,
             title: '',
             description: '',
             encounterActions: props.encounterActions,
@@ -106,18 +89,11 @@ class InitStory extends Component {
                 <h2>Create a Story</h2>
 
                 <form onSubmit={this.handleSubmit}>
-                    <Encounter id={1} placeholder={this.setRandomPlaceholder()} >
-                        <HorizontalScroll columnWidth={'100px'}>
-                            {this.state.encounterActions.map((object, i) =>
-                                <div {...actionTumb} key={i}>
-                                    <span>{object.keyword}</span>
-                                </div>
-                            )}
 
-                            <div {...actionTumb}>
-                                <Link to={`/create/add/encounteraction/${this.state.id}`}>+</Link>
-                            </div>
-                        </HorizontalScroll>
+                    <Encounter id={1} placeholder={this.setRandomPlaceholder()}>
+                        {this.state.encounterActions.map((object, i) =>
+                            <EncounterAction key={i} object={object} />
+                        )}
                     </Encounter>
 
                     {this.state.openPopup ? (
