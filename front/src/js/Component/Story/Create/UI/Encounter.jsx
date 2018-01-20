@@ -6,47 +6,12 @@ const textarea = css({
     minHeight:'200px'
 });
 
-const ActionTumb = css({
-    background: 'rgb(58, 58, 58)',
-    width: '100px',
-    height:'60px',
-    lineHeight: '60px',
-    textAlign: 'center',
-    color: '#bbb',
-    fontSize: '0.5em',
-    display:'inline-block',
-    marginRight: '10px;'
-});
-
-const buttonWrapper = css({
-    width: '100px',
-    height:'60px',
-    textAlign: 'center',
-    display:'inline-block',
-    verticalAlign: 'top',
-    '> a': {
-        display:'block',
-        background: 'rgb(55, 212, 152)',
-        width:'30px',
-        height:'30px',
-        borderRadius:'50%',
-        fontSize:'1em',
-        color:'white',
-        textDecoration: 'none',
-        paddingTop:'5px',
-        boxSizing: 'border-box',
-        margin:'15px auto 0 auto',
-        cursos:'pointer'
-    }
-});
-
 class Encounter extends Component {
     constructor(props) {
         super(props);
 
-        console.log("placeholder", props.placeholder)
-
         this.state = {
+            id: props.id,
             encounter: '',
             placeholder: props.placeholder
         };
@@ -81,26 +46,6 @@ class Encounter extends Component {
                     onChange={this.handleCange} 
                     placeholder={this.state.placeholder} 
                 />
-
-                <div className="EncoutnerActionWrapper">
-                    {/* {this.props.encounterActions.map((description, i) => 
-                        <div {...ActionTumb} key={i}>
-                            <span>{description}</span>
-                        </div>
-                    )} */}
-
-                    <div {...ActionTumb}>
-                        <span>Good</span>
-                    </div>
-
-                    <div {...ActionTumb}>
-                        <span>Bad</span>
-                    </div>
-
-                    <div {...buttonWrapper}>
-                        <Link to={'/Create/PickAdd'}>+</Link>
-                    </div>
-                </div>
 
                 {this.props.children}
             </div>

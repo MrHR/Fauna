@@ -1,7 +1,7 @@
 /** @format */
 
 import createBrowserHistory from 'history/createBrowserHistory';
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { css } from 'glamor';
 import { Provider } from 'react-redux';
@@ -14,9 +14,7 @@ import filter from './js/functions/functions';
 
 import logger from './js/logger';
 
-
-import LandingApp from './js/Component/Landing/LandingApp'
-import NoMatch from './js/Component/General/NoMatch'
+import LandingApp from './js/Component/Landing/LandingApp';
 import StoryApp from './js/Component/Story/StoryApp';
 
 const history = createBrowserHistory();

@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { css } from 'glamor';
+import { Router, Route } from 'react-router';
 import { Link } from 'react-router-dom';
 
 import Encounter from './UI/Encounter';
-import EncounterActionWrapper from './UI/EncounterActionWrapper';
 import Filter from '../../../functions/functions';
 import { returnRandomArrayValue } from '../../../functions/functions';
+import AddEncounterAction from './AddEncounterAction';
+import HorizontalScroll from './UI/HorizontalScroll';
+import StoryApp from '../StoryApp';
+import StoryOptions from '../Create/UI/popups/StoryOptions';
 
 const encPlaceholder = [
     "Surrounded by blossoming apple trees, the petals lightly rustling in the wind, Jhon continued...",
     "Marie violently woke up from her dream, she thought she heard someone enterning the room..."
 ];
 
-const AddButton = css({
+const addButton = css({
     position: 'fixed',
     bottom: '10px',
     margin: '10px 20px 10px 20px',
@@ -20,17 +24,42 @@ const AddButton = css({
     maxWidth: '800px'
 });
 
+const actionTumb = css({
+    background: 'rgb(58, 58, 58)',
+    width: '100%',
+    height:'60px',
+    lineHeight: '60px',
+    textAlign: 'center',
+    color: '#bbb',
+    fontSize: '1em',
+    '> a' : {
+        color:'white',
+        textDecoration: 'none',
+        cursor:'pointer'
+    }
+});
+
+const parent = css({
+    height:'60px'
+});
+
 class InitStory extends Component {
     constructor(props) {
         super(props);
         this.state = {
             title: '',
-            description: ''
+            description: '',
+            encounterActions: props.encounterActions,
+            overview: true,
+            openPopup: false
         }
 
         this.handleCange = this.handleCange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.setRandomPlaceholder = this.setRandomPlaceholder.bind(this);
+        this.openPopup = this.openPopup.bind(this);
+        this.closePopup = this.closePopup.bind(this);
+        this.addEncounter = this.addEncounter.bind(this);
 
     }
 
@@ -52,17 +81,53 @@ class InitStory extends Component {
         return returnRandomArrayValue(encPlaceholder);
     }
 
+    openPopup() {
+        this.setState({
+            openPopup:true
+        });
+    }
+
+    closePopup(event) {
+        const target = event.target;
+        if(target.classList.contains('popoverWrapper') || target.nodeName === 'IMG') {
+            this.setState({
+                openPopup:false
+            });
+        }   
+    }
+
+    addEncounter(event) {
+        
+    }
+
     render () {
         return(
             <div className="page">
                 <h2>Create a Story</h2>
+
                 <form onSubmit={this.handleSubmit}>
+                    <Encounter id={1} placeholder={this.setRandomPlaceholder()} >
+                        <HorizontalScroll columnWidth={'100px'}>
+                            {this.state.encounterActions.map((object, i) =>
+                                <div {...actionTumb} key={i}>
+                                    <span>{object.keyword}</span>
+                                </div>
+                            )}
 
-                    <Encounter placeholder={this.setRandomPlaceholder()} />
+                            <div {...actionTumb}>
+                                <Link to={`/create/add/encounteraction/${this.state.id}`}>+</Link>
+                            </div>
+                        </HorizontalScroll>
+                    </Encounter>
 
-                    <button className="button" value="+" {...AddButton}>+</button>
+                    {this.state.openPopup ? (
+                        <StoryOptions closePopup={this.closePopup} addEncounter={this.addEncounter}/>
+                    ) : null}
+
+                    <button className="button" {...addButton} onClick={this.openPopup}>+</button>
                 </form>
-            </div>     
+
+            </div>
         )
     }
 }

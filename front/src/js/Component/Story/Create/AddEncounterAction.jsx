@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import { css } from 'glamor';
+import { Router, Route, Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 
 const textarea = css({
-    minHeight:'100px'
-});
+    minHeight: '200px'
+})
 
-class InitStory extends Component {
+class AddEncounterAction extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: '',
-            description: ''
+            encounterId: props.match.params.id,
+            keyword: '',
+            description: '',
+            fireRedirect: false
         }
+
+        console.log('add encounter action id', props.match.params.id);
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,19 +36,33 @@ class InitStory extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        const formValues = {
+            EncounterId: this.state.encounterId,
+            keyword: this.state.keyword,
+            description: this.state.description
+        }
+
+        this.props.addEncounterAction(formValues);
+
+        this.setState({ fireRedirect: true });
     }
 
     render () {
+
+        const { fireRedirect } = this.state;
+
         return(
             <div className="page">
-                <h2>Create a Story</h2>
+                <h2>Add an action</h2>
+
                 <form onSubmit={this.handleSubmit}>
                     <input 
                         type="text" 
-                        name="title"
-                        value={this.state.title} 
+                        name="keyword"
+                        value={this.state.keyword} 
                         onChange={this.handleChange} 
-                        placeholder="Title" 
+                        placeholder="Keyword" 
+                        maxLength="30"
                     />
     
                     <textarea 
@@ -52,20 +71,24 @@ class InitStory extends Component {
                         value={this.state.description} 
                         onChange={this.handleChange} 
                         placeholder="Description" 
+                        maxLength="200"
                     />
-    
-                    {/* <input
+
+                    <input
                         className="button"
                         type="submit"
-                        value="Start"                    
-                    /> */}
-                    
-                    <Link to={'/Create'} className="button">Start</Link>
-                
+                        value="Add"                    
+                    />
+
                 </form>
-            </div>     
+
+                {fireRedirect && (
+                    <Redirect to={'/create'} />
+                )}
+                
+            </div>
         )
     }
 }
 
-export default InitStory
+export default AddEncounterAction

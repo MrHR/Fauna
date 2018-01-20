@@ -47,11 +47,7 @@ const ctaSecundary = css({
 
 
 class LoginApp extends Component {
-  constructor() {
-    super()
-  }
   render() {
-  
     return (
       <div {...LoginContainer}>
         <form>
