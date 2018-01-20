@@ -1,3 +1,10 @@
+:root {
+    --hightlightColor:rgb(55, 212, 152);
+    --inputFiledColor:rgb(58, 58, 58);
+    --baseColor:rgb(46, 46, 46);
+    --white: white;
+}
+
 html, body {
     font-family: 'Helvetica', 'Open Sans';
     font-size: 100%;
@@ -5,7 +12,7 @@ html, body {
 
 body {
     min-height:100vh;
-    background-color:rgb(46, 46, 46);
+    background-color:var(--baseColor);
 }
 
 h2 {
@@ -19,7 +26,7 @@ form {
 }
 
 input, textarea {
-    background-color:rgb(58, 58, 58);
+    background-color:var(--inputFiledColor);
     border:none;
     cursor: text;
 }
@@ -47,7 +54,7 @@ form input:focus, form textarea:focus {
 }
 
 .button {
-    background-color:rgb(55, 212, 152);
+    background-color:var(--hightlightColor);
     color:white;
     font-size:0.9em;
     cursor: pointer;
@@ -68,6 +75,43 @@ form input:focus, form textarea:focus {
     position:relative;
     max-width:800px;
     margin:0 auto;
+}
+
+/*#region popover*/
+
+.popoverWrapper {
+    background-color:rgba(0, 0, 0, 0.5);
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:100;
+    --borders: 10px;
+}
+
+.popoverWrapper .popover {
+    max-width:400px;
+    margin:0 auto;
+    background-color:var(--inputFiledColor);
+    border-radius:var(--borders);
+}
+
+.popoverWrapper .popover h2 {
+    background-color:var(--hightlightColor);
+    text-align:center;
+    color:rgb(255, 255, 255);
+    font-size:1.5em;
+    padding:30px;
+    border-radius:var(--borders) var(--borders) 0 0 ;
+    text-transform:capitalize;
+    box-shadow:0 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+/*#endregion*/
+
+.noScrollBar::-webkit-scrollbar { 
+    display: none; 
 }
 
 @media only screen and (max-width:950px) {
