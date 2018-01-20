@@ -22,6 +22,7 @@ class StoryApp extends Component {
       <div {...Container}>
         <Banner />
         <div {...StoryCreaterContainer}>
+          {/*hello*/}
           <Route path={'/'} exact component={InitStory} />
           <Route path={'/Create'} exact component={CreateStory} />
         </div>
