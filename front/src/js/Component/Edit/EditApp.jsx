@@ -23,9 +23,9 @@ class EditApp extends Component {
 	}
 	render() {
 		return (
-			<div {...Container}>
+			<div className="page" {...Container}>
 				<span>
-				<h1>Edit</h1>					
+				<h1>Edit Storyline</h1>					
 					<switch>
 						<Route path={`/edit/:uuid/:encounter_uuid`} exact component={EncounterPartApp} />	
 						<Route path={`/edit/:uuid`} exact component={EncounterApp} />	

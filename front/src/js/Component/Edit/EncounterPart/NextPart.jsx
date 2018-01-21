@@ -16,14 +16,14 @@ class NextPart extends Component {
 	}
 	render() {
 		return (
-			<div onClick={this.handleClick}>
-				<a>{this.props.data.cta}</a>
-
-				<p>
-					{this.props.data.story_text}
-				</p>
-
-			</div>
+			<li className={'listItem'} onClick={this.handleClick}>
+				<a>
+					<h3>{this.props.data.cta}</h3>
+					<p>
+						{this.props.data.story_text}
+					</p>
+				</a>
+			</li>
 
 		)
 	}

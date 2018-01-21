@@ -7,30 +7,46 @@ import { EncounterPartSelectActive } from './../../../Actions/EncounterPartActio
 import CreateFollow from './CreateFollow'
 import NextPart from './NextPart'
 
+const text = css({
+	padding:'20px 0',
+	fontFamily:'Lora',
+})
+
 class Part extends Component {
 	constructor() {
 		super()
 		this.handleBack = this.handleBack.bind(this)
 	}
+
 	handleBack() {
 		this.props.selectEncounterPart(this.props.data.follows)
 	}
-	render() {
 
+	render() {
 		const { list } = this.props.encounterParts;
 
 		const following = list.map((index, key) => {
 			if(index.follows === this.props.data.uuid) {
 				return <NextPart data={index} key={key} />
 			}
-		})
+		});
+		
 		return (
 			<div>
 				{ this.props.data.uuid !== this.props.encounter.detail.start_encounter_part_uuid ?
-					<a onClick={this.handleBack}>back</a>: null }
-				{this.props.data.story_text}
+					<a onClick={this.handleBack}>back</a> : null 
+				}
+
+				<div {...text}>
+					{this.props.data.story_text}
+				</div>
+
 				<CreateFollow />
-				{following}
+
+				<ul>
+					{following}
+				</ul>
+				
 			</div>
 		)
 	}

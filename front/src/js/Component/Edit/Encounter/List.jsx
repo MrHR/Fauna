@@ -5,12 +5,6 @@ import { css } from 'glamor';
 import { EncounterFetchList } from './../../../Actions/EncounterActions'
 import Item from './Item';
 
-const part = css({
-	backgroundColor: '#fff',
-	margin: 'auto',
-	padding: '50px',
-	marginBottom: '30px'
-})
 class List extends Component {
 
 	constructor() {
@@ -21,14 +15,12 @@ class List extends Component {
 		}
 	}
 	componentDidMount() {
-		this.props.fetchList(this.props.story.detail.uuid)
+		this.props.fetchList(this.props.uuid)
 	}
-
-
 
 	render() {
 		return (
-			<div {...part}>
+			<div>
 				<ul>
 					{this.props.encounter.list.map((index, key) => {
 						return <Item data={index} key={key} />

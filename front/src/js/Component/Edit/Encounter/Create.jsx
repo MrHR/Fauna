@@ -22,6 +22,7 @@ const part = css({
 	padding: '50px',
 	marginBottom: '30px'
 })
+
 class Create extends Component {
 
 	constructor() {
@@ -35,7 +36,9 @@ class Create extends Component {
 	}
 	handleSubmit() {
 		const data = this.state;
+		console.log("data",data);
 		data['story_uuid'] = this.props.story.detail.uuid;
+		console.log('new data', data);
 		this.props.createItem(data)
 	}
 
@@ -47,21 +50,20 @@ class Create extends Component {
 
 	render() {
 		return (
-
-			<div {...part}>
-				<div {...formField}>
+			<div>
+				<div>
 					<label htmlFor={'character_uuid'}>character_uuid</label>
 					<input type="text" name="character_uuid" onChange={(e) => this.handleChange(e) } placeholder={'character_uuid'} />
 				</div>
-				<div {...formField}>
+				<div>
 					<label htmlFor={'description'}>Description</label>
 					<input type="text" name="description" onChange={(e) => this.handleChange(e)} placeholder={'description'} />
 				</div>
-				<div {...formField}>
+				<div>
 					<label htmlFor={'start'}>Description</label>
 					<textarea type="text" name="start" onChange={(e) => this.handleChange(e)} placeholder={'start'}></textarea>
 				</div>
-				<a onClick={this.handleSubmit}> {this.props.encounter.created === null ? <span>Create encounter</span> : <span>saved</span>} </a>
+				<a className={'button'} onClick={this.handleSubmit}> {this.props.encounter.created === null ? <span>Create encounter</span> : <span>saved</span>} </a>
 			</div>
 		)
 	}

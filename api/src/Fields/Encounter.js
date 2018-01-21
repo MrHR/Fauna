@@ -35,10 +35,11 @@ class Story {
         res.send(200, data)
       })
     })
-    
 
     app.get('/encounter/story/:uuid', async(req, res, next) => {
+      console.log(req.params.uuid)
       pg.select('*').table('encounter').where({story_uuid: req.params.uuid}).then((data) => {
+        console.log(data.length)
         res.send(200, data)
       })
     })

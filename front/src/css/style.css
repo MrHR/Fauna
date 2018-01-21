@@ -12,7 +12,7 @@
 
 /*light*/
 :root {
-    --baseColor:rgb(241, 241, 241);
+    --baseColor:rgb(233, 233, 233);
     --inputFiledColor:rgb(255, 255, 255);
     --inputFiledColorDarker:rgb(194, 194, 194);
     --hightlightColor:rgb(55, 212, 152);
@@ -60,7 +60,7 @@ input, textarea {
     box-sizing:border-box;
     padding:10px;
     margin:10px 0;
-    color:white;
+    color:var(--textColor);
     position:relative;
     resize: none;
     font-size:0.8em;
@@ -128,6 +128,7 @@ form input:focus, form textarea:focus {
     color:var(--headerColor);
     text-decoration: none;
     position:relative;
+    cursor:pointer;
 }
 
 /* .listItem a::after {

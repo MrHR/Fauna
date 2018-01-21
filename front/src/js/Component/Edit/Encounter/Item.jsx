@@ -10,7 +10,7 @@ export default class Item extends Component {
 	}
 	render() {
 		return (
-			<li> {this.props.data.description} <Link to={`/edit/${this.props.data.story_uuid}/${this.props.data.uuid}`}>Edit</Link></li>
+			<li className="listItem"><Link to={`/edit/${this.props.data.story_uuid}/${this.props.data.uuid}`}> {this.props.data.description} </Link></li>
 		)
 	}
 }

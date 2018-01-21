@@ -34,6 +34,7 @@ function* encounterCreateItem(action) {
         url: `http://localhost:3000/encounterpart`,
         data: action.data
       })
+      yield put({type: "ENCOUNTER_PART_FETCH_LIST", data: action.data.encounter_uuid});
       yield put({type: "ENCOUNTER_PART_CREATE_ITEM_SUCCESS", data: result.data.created});
    } catch (e) {
       yield put({type: "ENCOUNTER_PART_CREATE_ITEM_FAILED", message: e.message});

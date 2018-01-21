@@ -7,6 +7,7 @@ import Part from './Part'
 
 import { EncounterPartFetchList } from './../../../Actions/EncounterPartActions';
 import { EncounterFetchItem } from './../../../Actions/EncounterActions';
+import { StoryFetchItem } from './../../../Actions/StoryActions';
 
 const formField = css({
 	display: 'block',
@@ -31,10 +32,13 @@ class EncounterPartApp extends Component {
 	constructor() {
 		super()
 	}
+
 	componentDidMount() {
 		this.props.fetchItem(this.props.match.params.encounter_uuid)
 		this.props.fetchList(this.props.match.params.encounter_uuid)
+		this.props.fetchStoryItem(this.props.match.params.uuid)
 	}
+
 	render() {
 		const { list } = this.props.encounterParts;
 		const display = list.map((index, key) => {
@@ -42,8 +46,12 @@ class EncounterPartApp extends Component {
 				return <Part data={index} key={key} />
 			}
 		})
+
+		console.log(this.props.data);
+
 		return (
-			<div {...part}>
+			<div>
+				{/*TODO Story title*/}
 				{display}
 			</div>
 		)
@@ -61,7 +69,8 @@ export default connect(
 	dispatch => {
 		return {
 			fetchList: (data) => { dispatch( EncounterPartFetchList(data) )},
-			fetchItem: (data) => { dispatch( EncounterFetchItem(data) )}
+			fetchItem: (data) => { dispatch( EncounterFetchItem(data) )},
+			fetchStoryItem: (data) => { dispatch( StoryFetchItem(data) )}
 		}
 	}
 )(EncounterPartApp)

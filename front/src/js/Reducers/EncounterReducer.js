@@ -25,9 +25,9 @@ export function EncounterReducer(state = initialState, action) {
 		case ENCOUNTER_FETCH_LIST:
 			return { 
 				...state,
-				loading: true
+				loading: true,
+				list: []
 			}
-
 		case ENCOUNTER_FETCH_LIST_SUCCESS:
 			return { 
 				...state,
@@ -37,7 +37,8 @@ export function EncounterReducer(state = initialState, action) {
 		case ENCOUNTER_FETCH_ITEM: 
 			return {
 				...state,
-				loading: true
+				loading: true,
+				detail: null
 			}
 
 		case ENCOUNTER_FETCH_ITEM_SUCCESS:
@@ -51,7 +52,8 @@ export function EncounterReducer(state = initialState, action) {
 	      console.log("init")
 	      return {
 	        ...state,
-	        loading: true
+					loading: true,
+					created: null
 	      }
 
 	    case ENCOUNTER_CREATE_ITEM_SUCCESS:

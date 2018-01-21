@@ -34,11 +34,12 @@ class CreateFollow extends Component {
 			story_text: ''
 		}
 	}
+
 	handleSubmit() {
 		const data = this.state;
 		data['follows'] = this.props.encounterParts.active;
-		data['encounter_uuid'] = this.props.encounter.detail.uuid
-		this.props.createItem(data)
+		data['encounter_uuid'] = this.props.encounter.detail.uuid;
+		this.props.createItem(data);
 	}
 
 	handleChange(e) {
@@ -48,21 +49,20 @@ class CreateFollow extends Component {
 
 	render() {
 		return (
-
-			<div {...part}>
-				<div {...formField}>
+			<div>
+				<div>
 					<label htmlFor={'type'}>type</label>
 					<input type="text" name="type" onChange={(e) => this.handleChange(e) } placeholder={'type'} />
 				</div>
-				<div {...formField}>
+				<div>
 					<label htmlFor={'cta'}>cta</label>
 					<input type="text" name="cta" onChange={(e) => this.handleChange(e) } placeholder={'cta'} />
 				</div>
-				<div {...formField}>
+				<div>
 					<label htmlFor={'story_text'}>text</label>
 					<textarea type="text" name="story_text" onChange={(e) => this.handleChange(e)} placeholder={'story_text'}></textarea>
 				</div>
-				<a onClick={this.handleSubmit}> {this.props.encounterParts.created === null ? <span>Create encounterpart</span> : <span>saved</span>} </a>
+				<a className={'button'} onClick={this.handleSubmit}> {this.props.encounterParts.created === null ? <span>Create encounterpart</span> : <span>saved</span>} </a>
 			</div>
 		)
 	}

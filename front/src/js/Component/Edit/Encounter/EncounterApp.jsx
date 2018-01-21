@@ -7,6 +7,10 @@ import { StoryFetchItem } from './../../../Actions/StoryActions'
 import Create from './Create'
 import List from './List'
 
+const header = css({
+	paddingBottom:'30px'
+})
+
 class EncounterPartApp extends Component {
 	constructor() {
 		super()
@@ -18,14 +22,15 @@ class EncounterPartApp extends Component {
 	}
 	render() {
 		return (
-			<span>
+			<div>
 				{ this.props.story.detail ? 
 					<span>
+						<h3 {...header}>{this.props.story.detail.title}</h3>
 						<Create />
-						<List />
+						<List uuid={this.props.match.params.uuid} />
 					</span>
 				: <span>loading</span> }
-			</span>
+			</div>
 		)
 	}
 }

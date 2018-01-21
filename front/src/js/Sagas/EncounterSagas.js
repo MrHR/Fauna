@@ -34,6 +34,10 @@ function* encounterCreateItem(action) {
         url: `http://localhost:3000/encounter`,
         data: action.data
       })
+
+      console.log('data', result.data);
+
+      yield put({type: "ENCOUNTER_FETCH_LIST", data: action.data.story_uuid});
       yield put({type: "ENCOUNTER_CREATE_ITEM_SUCCESS", data: result.data.created});
    } catch (e) {
       yield put({type: "ENCOUNTER_CREATE_ITEM_FAILED", message: e.message});
