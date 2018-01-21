@@ -37,9 +37,10 @@ class AddEncounterAction extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const formValues = {
-            EncounterId: this.state.encounterId,
+            encounterId: this.state.encounterId,
             keyword: this.state.keyword,
-            description: this.state.description
+            description: this.state.description,
+            clicked: false
         }
 
         this.props.addEncounterAction(formValues);

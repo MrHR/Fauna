@@ -37,33 +37,21 @@ class InitStory extends Component {
             openPopup: false
         }
 
-        this.handleCange = this.handleCange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.setRandomPlaceholder = this.setRandomPlaceholder.bind(this);
         this.openPopup = this.openPopup.bind(this);
         this.closePopup = this.closePopup.bind(this);
         this.addEncounter = this.addEncounter.bind(this);
 
+        console.log('create story change', this.state.encounterActions);
+
     }
 
-    handleCange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-    }
-
+    //set a random placeholder for encounter
     setRandomPlaceholder() {
         return returnRandomArrayValue(encPlaceholder);
     }
 
+    //choose encounter or combat
     openPopup() {
         this.setState({
             openPopup:true
@@ -80,7 +68,6 @@ class InitStory extends Component {
     }
 
     addEncounter(event) {
-        
     }
 
     render () {
@@ -88,11 +75,10 @@ class InitStory extends Component {
             <div className="page">
                 <h2>Create a Story</h2>
 
-                <form onSubmit={this.handleSubmit}>
-
+                <form>
                     <Encounter id={1} placeholder={this.setRandomPlaceholder()}>
                         {this.state.encounterActions.map((object, i) =>
-                            <EncounterAction key={i} object={object} />
+                            <EncounterAction key={i} object={object} setEncounterActionState={this.props.setEncounterActionState}/>   
                         )}
                     </Encounter>
 

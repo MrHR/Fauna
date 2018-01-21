@@ -17,29 +17,43 @@ class EncounterAction extends Component {
         super(props);
 
         this.state = {
-            clicked:false,
-            className: ''
+            className: 'repeatingLinearGradient',
+            Id: props.object.Id,
+            clicked: props.object.clicked,
+            encounterId: props.object.encounterId,
+            keyword: props.object.keyword,
+            description: props.object.description,
+            
         }
 
         this.handleClick = this.handleClick.bind(this);
+
     }
 
-    //TODO save this in CreateStory otherwise when rerendering encounter selection is lost
-    handleClick(event) {
+    handleClick(e) {
+        this.setState((prevState, props) => {
+            const newClicked = !prevState.clicked;
+            return {
+                clicked: newClicked
+            } 
+        }, () => {
+            const enoucnterAction = {
+                Id: this.state.Id,
+                clicked: this.state.clicked,
+                encounterId: this.state.encounterId,
+                keyword: this.state.keyword,
+                description: this.state.description
+            }
+    
+            this.props.setEncounterActionState(enoucnterAction);
+        });
 
         
-
-        this.setState((prevstate, props) => {
-            return {
-                className:this.state.clicked ? '' : 'repeatingLinearGradient',
-                clicked: !prevstate.clicked
-            }
-        });
     }
 
     render () {
         return(
-            <div {...actionTumb} onClick={this.handleClick} className={this.state.className}>
+            <div {...actionTumb} onClick={this.handleClick} className={this.state.clicked ? this.state.className : null}>
                 <span>{this.props.object.keyword}</span>
             </div>
         )

@@ -26,17 +26,44 @@ class StoryApp extends Component {
     });
 
     this.addEncounterAction = this.addEncounterAction.bind(this);
+    this.setEncounterActionState = this.setEncounterActionState.bind(this);
 
   }
 
+  //add Encounter Action
   addEncounterAction(encounterActionValues) {
+
     this.setState((prevState, props) => {
       const arrayPrevState = prevState.encounterActions;
-      console.log('state', this.state.encounterActions);
-
+      let tempEncounterActionValues = encounterActionValues;
+      tempEncounterActionValues.Id = arrayPrevState.length + 1;
+      const newEncounterActionValues = tempEncounterActionValues;
+      
       return {
-        encounterActions: [...arrayPrevState, encounterActionValues]
+        encounterActions: [...arrayPrevState, newEncounterActionValues]
       }
+
+    });
+  }
+
+  //Set state after clicking an encounter action
+  setEncounterActionState(encounterActionValue) {
+    this.setState((prevState, props) => {
+      const arrayPrevState = prevState.encounterActions;
+      const newArray = arrayPrevState.map((object, i) => {
+          if(object.Id !== encounterActionValue.Id) {
+            let newObject = object;
+            newObject.clicked = false;
+            return newObject;
+          } else {
+            return encounterActionValue;
+          }
+        });
+      
+      return {
+        encounterActions: newArray
+      }
+
     });
   }
 
@@ -48,7 +75,11 @@ class StoryApp extends Component {
             <Route path={'/'} exact component={InitStory} />
             
             <Route path={'/create'} exact render={(props) => (
-              <CreateStory {...props} encounterActions={this.state.encounterActions} />
+              <CreateStory 
+                {...props} 
+                encounterActions={this.state.encounterActions} 
+                setEncounterActionState={this.setEncounterActionState}
+              />
             )}/>
 
             <Route path={'/create/add/encounteraction/:id'} render={(props) => (
