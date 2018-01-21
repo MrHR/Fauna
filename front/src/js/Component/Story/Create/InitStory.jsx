@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { css } from 'glamor';
 import { Link } from 'react-router-dom';
+
+import { StoryCreateItem } from './../../../Actions/StoryActions';
 
 const textarea = css({
     minHeight:'100px'
@@ -29,14 +32,15 @@ class InitStory extends Component {
         });
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
+    handleSubmit() {
+      const data = this.state;
+      this.props.createStory(this.state);
     }
 
     render () {
         return(
             <div className="page">
-                <h2>Create a Story</h2>
+                <h2>Create a Story {this.props.story.loading ? <span>(loading)</span> : null} </h2>
                 <form onSubmit={this.handleSubmit}>
                     <input 
                         type="text" 
@@ -60,7 +64,7 @@ class InitStory extends Component {
                         value="Start"                    
                     /> */}
                     
-                    <Link to={'/Create'} className="button">Start</Link>
+                    <a className="button" onClick={this.handleSubmit}>Start</a>
                 
                 </form>
             </div>     
@@ -68,4 +72,16 @@ class InitStory extends Component {
     }
 }
 
-export default InitStory
+export default connect(
+  state => {
+    return {
+      story: state.story
+    }
+  },
+  dispatch => {
+    return {
+      createStory: (data) => { dispatch(StoryCreateItem(data) )}
+    }
+
+  }
+)(InitStory)

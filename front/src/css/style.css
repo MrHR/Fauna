@@ -1,8 +1,25 @@
+
+/*dark*/
 :root {
     --hightlightColor:rgb(55, 212, 152);
     --inputFiledColor:rgb(58, 58, 58);
+    --inputFiledColorDarker:rgb(39, 39, 39);
     --baseColor:rgb(46, 46, 46);
     --white: white;
+    --headerColor: rgb(216, 216, 216);
+    --textColor: #888;
+}
+
+/*light*/
+:root {
+    --baseColor:rgb(241, 241, 241);
+    --inputFiledColor:rgb(255, 255, 255);
+    --inputFiledColorDarker:rgb(194, 194, 194);
+    --hightlightColor:rgb(55, 212, 152);
+    --white: white;
+    --headerColor: rgb(0, 0, 0);
+    --subheaderColor:rgb(55, 212, 152);
+    --textColor: rgb(61, 61, 61);
 }
 
 html, body {
@@ -15,9 +32,15 @@ body {
     background-color:var(--baseColor);
 }
 
-h2 {
+h1, h2 {
     padding:10px 0;
-    color:#aaa;
+    color:var(--headerColor);
+    font-size:1.8em;
+    font-weight:bold;
+}
+
+h3 {
+    color:var(--subheaderColor);
     font-size:1.3em;
 }
 
@@ -25,27 +48,31 @@ form {
     box-sizing: border-box;
 }
 
+label {
+    display:none;
+}
+
 input, textarea {
     background-color:var(--inputFiledColor);
     border:none;
     cursor: text;
-}
-
-input[type='submit'] {
-    cursor:pointer;
-}
-
-form input, form textarea {
-    box-sizing:border-box;
     display:block;
+    box-sizing:border-box;
     padding:10px;
-    /* border-radius:5px; */
     margin:10px 0;
     color:white;
     position:relative;
     resize: none;
     font-size:0.8em;
     width:100%;
+}
+
+textarea {
+    min-height:150px;
+}
+
+input[type='submit'] {
+    cursor:pointer;
 }
 
 form input:focus, form textarea:focus {
@@ -73,7 +100,7 @@ form input:focus, form textarea:focus {
 .page {
     padding:20px 20px 100px 20px;
     position:relative;
-    max-width:800px;
+    max-width:700px;
     margin:0 auto;
 }
 
@@ -85,6 +112,55 @@ form input:focus, form textarea:focus {
         var(--baseColor) 3px,
         var(--baseColor) 6px
     )
+}
+
+.listItem {
+    background: var(--inputFiledColor);
+    box-sizing:border-box;
+    margin:5px 0;
+    color:var(--headerColor);
+    height:auto;
+}
+
+.listItem a {
+    display:block;
+    padding:20px;
+    color:var(--headerColor);
+    text-decoration: none;
+    position:relative;
+}
+
+/* .listItem a::after {
+    content:'';
+    height:10px;
+    width:10px;
+    position:absolute;
+    right:20px;
+    top:calc(50% - 5px);
+
+    --borderWidth: 3px;
+    border-top:var(--borderWidth) solid var(--hightlightColor);
+    border-right:var(--borderWidth) solid var(--hightlightColor);
+    transform: rotate(45deg);
+} */
+
+.listItem a:hover {
+    background:var(--inputFiledColorDarker);
+}
+
+.listItem a:hover h3 {
+    color:white;
+}
+
+.listItem a h2 {
+    margin:0;
+    padding:0;
+    font-size:1.2em;
+}
+
+.listItem a p {
+    padding-top:10px;
+    color:var(--textColor);
 }
 
 /*#region popover*/
@@ -125,7 +201,4 @@ form input:focus, form textarea:focus {
 }
 
 @media only screen and (max-width:950px) {
-    html, body {
-        font-size:110%;
-    }
 }

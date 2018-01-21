@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { css } from 'glamor'
-
+import { connect } from 'react-redux'
 import { Router, Route } from 'react-router'
 
 import InitStory from './Create/InitStory'
+import ListApp  from './List/ListApp'
 import CreateStory from './Create/CreateStory'
 import Introduction from './Introduction'
 import Banner from './Banner'
@@ -72,24 +73,37 @@ class StoryApp extends Component {
       <div {...Container}>
         <Banner />
         <div {...StoryCreaterContainer}>
+          <Route path={'/list'} exact component={ListApp} />
+
+          { this.props.story.created === null ?
             <Route path={'/'} exact component={InitStory} />
-            
+          : <Route path={'/'} exact component={CreateStory} /> }
+{/*
             <Route path={'/create'} exact render={(props) => (
               <CreateStory 
                 {...props} 
                 encounterActions={this.state.encounterActions} 
                 setEncounterActionState={this.setEncounterActionState}
               />
-            )}/>
+            )}/>*/}
 
-            <Route path={'/create/add/encounteraction/:id'} render={(props) => (
+{/*            <Route path={'/create/add/encounteraction/:id'} render={(props) => (
               <AddEncounterAction {...props} addEncounterAction={this.addEncounterAction}/>
             )}/> 
-
+*/}
         </div>
       </div>
     )
   }
 }
 
-export default StoryApp
+export default connect(
+  state => {
+    return {
+      story: state.story
+    }
+  },
+  dispatch => {
+    return {}
+  }
+)(StoryApp)

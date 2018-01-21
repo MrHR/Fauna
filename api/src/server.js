@@ -11,6 +11,8 @@ const server = http.Server(app);
 const PORT = 3000;
 
 const UserApp = require('./Fields/User/User.js')
+const StoryApp = require('./Fields/Story.js');
+const EncounterApp = require('./Fields/Encounter.js')
 
 class App {
 
@@ -48,7 +50,8 @@ class App {
     })
 
     new UserApp( app );
-
+    new StoryApp(app, this.pg)
+    new EncounterApp(app, this.pg)
 
     server.listen(PORT, () => {
       console.log(`server up and listening on ${PORT}`)
@@ -101,12 +104,26 @@ class App {
       console.log("created character");
     });
 
-    await this.pg.schema.createTableIfNotExists('encounter', function (table){
+
+    await this.pg.schema.createTableIfNotExists('story', function (table){
       table.increments();
       table.uuid("uuid");
+      table.string("title");
       table.string("character_uuid");
       table.string("description");
       table.string("start_part_uuid");
+      table.timestamps(true, true);
+    }).then(function () {
+      console.log("created Story");
+    });
+
+    await this.pg.schema.createTableIfNotExists('encounter', function (table){
+      table.increments();
+      table.uuid("uuid");
+      table.uuid("story_uuid");
+      table.string("character_uuid");
+      table.string("description");
+      table.string("start_encounter_part_uuid");
       table.timestamps(true, true);
     }).then(function () {
       console.log("created Encounter");
@@ -116,14 +133,14 @@ class App {
       table.increments();
       table.uuid("uuid");
       table.string("encounter_uuid");
-      table.string("story_text");
-      table.string("description");
-      table.string("combat_uuid");
-      table.string("encounter_part_uuid");
+      table.text("story_text", "longtext");
+      table.string("follows");
+      table.string("cta");
       table.timestamps(true, true);
     }).then(function () {
       console.log("created encounter part");
     });
+
 
     await this.pg.schema.createTableIfNotExists('encounter_action', function (table){
       table.increments();
