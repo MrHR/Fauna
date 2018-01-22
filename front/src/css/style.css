@@ -44,6 +44,14 @@ h3 {
     font-size:1.3em;
 }
 
+h4 {
+    margin:30px 0 20px 0;
+    padding:10px 0 10px 0;
+    font-weight: lighter;
+    display:block;
+    border-bottom:1px solid #ddd;
+}
+
 form {
     box-sizing: border-box;
 }

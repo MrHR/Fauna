@@ -50,6 +50,7 @@ class CreateFollow extends Component {
 	render() {
 		return (
 			<div>
+				<h4>Create an Encounter Part</h4>
 				<div>
 					<label htmlFor={'type'}>type</label>
 					<input type="text" name="type" onChange={(e) => this.handleChange(e) } placeholder={'type'} />
@@ -62,7 +63,7 @@ class CreateFollow extends Component {
 					<label htmlFor={'story_text'}>text</label>
 					<textarea type="text" name="story_text" onChange={(e) => this.handleChange(e)} placeholder={'story_text'}></textarea>
 				</div>
-				<a className={'button'} onClick={this.handleSubmit}> {this.props.encounterParts.created === null ? <span>Create encounterpart</span> : <span>saved</span>} </a>
+				<a className={'button'} onClick={this.handleSubmit}> {this.props.encounterParts.created == null ? <span>Create encounterpart</span> : <span>saved</span>} </a>
 			</div>
 		)
 	}

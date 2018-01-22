@@ -51,6 +51,7 @@ class Create extends Component {
 	render() {
 		return (
 			<div>
+				<h4>Create an Encounter</h4>
 				<div>
 					<label htmlFor={'character_uuid'}>character_uuid</label>
 					<input type="text" name="character_uuid" onChange={(e) => this.handleChange(e) } placeholder={'character_uuid'} />

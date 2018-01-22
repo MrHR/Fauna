@@ -37,6 +37,8 @@ class EncounterPartApp extends Component {
 		this.props.fetchItem(this.props.match.params.encounter_uuid)
 		this.props.fetchList(this.props.match.params.encounter_uuid)
 		this.props.fetchStoryItem(this.props.match.params.uuid)
+
+		
 	}
 
 	render() {
@@ -47,11 +49,9 @@ class EncounterPartApp extends Component {
 			}
 		})
 
-		console.log(this.props.data);
-
 		return (
 			<div>
-				{/*TODO Story title*/}
+				<h3>{this.props.story.detail ? this.props.story.detail.title : '(Loading)'}</h3>
 				{display}
 			</div>
 		)

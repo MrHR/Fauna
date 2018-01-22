@@ -8,7 +8,6 @@ import Create from './Create'
 import List from './List'
 
 const header = css({
-	paddingBottom:'30px'
 })
 
 class EncounterPartApp extends Component {

@@ -21,6 +21,7 @@ class List extends Component {
 	render() {
 		return (
 			<div>
+				<h4>Encounters</h4>
 				<ul>
 					{this.props.encounter.list.map((index, key) => {
 						return <Item data={index} key={key} />

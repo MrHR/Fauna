@@ -8,8 +8,27 @@ import CreateFollow from './CreateFollow'
 import NextPart from './NextPart'
 
 const text = css({
-	padding:'20px 0',
+	padding:'40px 0',
 	fontFamily:'Lora',
+})
+
+const link = css({
+	textDecoration:'none',
+	padding:'5px',
+	cursor:'pointer',
+	color:'white',
+	backgroundColor:'black',
+	borderRadius:'5px',
+	fontSize:'0.8em',
+	position:'relative',
+	top:'20px',
+	opacity:'0.5',
+	'::before' : {
+		content:'<'
+	},
+	':hover' : {
+		opacity:'1'
+	}
 })
 
 class Part extends Component {
@@ -34,7 +53,7 @@ class Part extends Component {
 		return (
 			<div>
 				{ this.props.data.uuid !== this.props.encounter.detail.start_encounter_part_uuid ?
-					<a onClick={this.handleBack}>back</a> : null 
+					<a {...link} onClick={this.handleBack}>&nbsp;back</a> : null 
 				}
 
 				<div {...text}>
@@ -43,6 +62,7 @@ class Part extends Component {
 
 				<CreateFollow />
 
+				<h4>Encounter Parts</h4>
 				<ul>
 					{following}
 				</ul>
