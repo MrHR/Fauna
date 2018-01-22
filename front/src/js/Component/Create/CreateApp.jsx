@@ -6,18 +6,14 @@ import { Router, Route } from 'react-router'
 import InitStory from './InitStory';
 
 const Container = css({
-
 })
 
 const StoryCreaterContainer = css({
-  width:  '100%',
-  boxSizing: 'border-box'
 });
 
 class CreateApp extends Component {
   constructor(props) {
     super(props);
-
   }
 
 
@@ -25,7 +21,7 @@ class CreateApp extends Component {
     console.log(this.props.match)
     return (
       <div {...Container}>
-        <div {...StoryCreaterContainer}>
+        <div {...StoryCreaterContainer} className="page">
           <InitStory />
         </div>
       </div>

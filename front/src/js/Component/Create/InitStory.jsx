@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'glamor';
+import { Redirect } from 'react-router';
 
 import { StoryCreateItem } from './../../Actions/StoryActions'
 
@@ -19,7 +20,8 @@ class InitStory extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.state = {
 			title: '',
-			description: ''
+			description: '',
+			fireRedirect: false
 		}
 	}
 	handleChange(e) {
@@ -29,9 +31,15 @@ class InitStory extends Component {
 
 	handleSubmit() {
 		this.props.createItem(this.state);
+		this.setState({
+			fireRedirect: true
+		})
 	}
 
 	render() {
+
+		const { fireRedirect } = this.state;
+
 		return (
 
 			<div {...part}>
@@ -55,7 +63,12 @@ class InitStory extends Component {
 						<a>Edit</a>
 					</div>
 				}
+
+				{fireRedirect && (
+          <Redirect to={'/'}/>
+        )}
 			</div>
+			
 
 		)
 	}
