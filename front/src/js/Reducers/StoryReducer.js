@@ -34,6 +34,7 @@ export function StoryReducer(state = initialState, action) {
 				loading: false,
 				list: action.data.data
 			}
+			
 		case STORY_FETCH_ITEM: 
 			return {
 				...state,
