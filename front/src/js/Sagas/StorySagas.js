@@ -34,10 +34,26 @@ function* storyCreateItem(action) {
         url: `http://localhost:3000/story`,
         data: action.data
       })
+      yield put({type: "STORY_FETCH_LIST"});
       yield put({type: "STORY_CREATE_ITEM_SUCCESS", data: result.data.created});
    } catch (e) {
       yield put({type: "STORY_CREATE_ITEM_FAILED", message: e.message});
    }
+}
+
+function* storyDeleteItem(action) {
+  console.log('deletedata', action);
+
+  try {
+    const result = yield axios({
+      method:'post',
+      url:`http://localhost:3000/story/${action.uuid}`
+    })
+    yield put({type: "STORY_FETCH_LIST"});
+    yield put({type: "STORY_DELETE_ITEM_SUCCESS", data: result.data.deleted});
+  } catch(e) {
+    yield put({type: "STORY_DELETE_ITEM_FAILED", message: e.message});
+  }
 }
 /*
   Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
@@ -47,6 +63,7 @@ function* storySagas() {
   yield takeEvery("STORY_FETCH_LIST", storyFetchList);
   yield takeEvery("STORY_FETCH_ITEM", storyFetchItem);
   yield takeEvery("STORY_CREATE_ITEM", storyCreateItem);
+  yield takeEvery("STORY_DELETE_ITEM", storyDeleteItem);
 }
 
 export default storySagas;

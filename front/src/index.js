@@ -18,8 +18,6 @@ import Sagas from './js/Sagas/'
 
 import logger from './js/logger';
 
-import StoryApp from './js/Component/Story/StoryApp';
-
 import ReadApp from './js/Component/Read/ReadApp';
 import CreateApp from './js/Component/Create/CreateApp'
 import EditApp from './js/Component/Edit/EditApp'
