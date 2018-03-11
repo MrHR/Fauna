@@ -11,6 +11,7 @@ import { StoryDeleteItem } from './../../../Actions/StoryActions'
 import ListItem from './ListItem'
 import CreateApp from './../../Create/CreateApp';
 import trash from '../../../../../public/images/icon_trash.png';
+import Menu from '../../General/ListMenu';
 
 const Stories = css({
 	'> a': {
@@ -20,23 +21,62 @@ const Stories = css({
 		width:'50px !important',
 		height:'50px !important',
 		textAlign:'center',
-		borderRadius:'50%',
-
+		borderRadius:'50%'
 	}
 
+})
+
+const listselect = css({
+	display:'inline-block',
+	height:'100%',
+	minWidth:'40px',
+	boxSizing:'border-box',
+	textAlign:'center',
+	'> input[type=checkbox]': {
+		cursor:'pointer',
+		marginLeft:'10px'
+	}
+})
+
+const listTools = css({
+	float:'right',
+	position:'relative',
+	top:'10px',
+	right:'30px',
+	'> button' : {
+		border:'none',
+		background:'transparent',
+		width:'30px',
+		opacity:'0.5',
+		cursor:'pointer',
+		':hover' : {
+			opacity:'1'
+		},
+		':focus': {
+			outline:'none'
+		},
+		'> img' : {
+			width:'100%'
+		}
+	}
 })
 
 class StoryList extends Component {
 	constructor() {
 		super();
 
-		this.handleDelete = this.handleDelete.bind(this);
-		this.handleSwipe = this.handleSwipe.bind(this);
-		this.handlePress = this.handlePress.bind(this)
+		this.state = {
+			showSelectBoxes: false
+		}
+
+		this.handleDelete = this.handleDelete.bind(this)
+		this.handleSelectClick = this.handleSelectClick.bind(this)
+		this.handleUnselectClick = this.handleUnselectClick.bind(this)
 	}
 
 	componentDidMount() {
 		this.props.fetchList();
+		document.addEventListener('onmousedown', this.toggleMenu);
 	}
 
 	handleDelete(e) {
@@ -44,28 +84,58 @@ class StoryList extends Component {
 		this.props.deleteItem(e.currentTarget.dataset.uuid);
 	}
 
-	handleSwipe(e) {
-		console.log(e);
+	handleSelectClick() {
+		this.setState({
+			showSelectBoxes:true
+		})
 	}
 
-	handlePress(e) {
-		console.log('press')
+	handleUnselectClick() {
+		this.setState({
+			showSelectBoxes:false
+		})
 	}
 
 	render() {
 		return (
 			<div className={'page'}>
 				<h2>Stories</h2>
+
+				<div {...listTools}>
+						<button className="btnDelete" onClick={this.handleDelete}>
+							<img src={trash} alt="icon trash"/>
+						</button>
+				</div>
+				
+				<Menu>
+					{ this.state.showSelectBoxes ?
+						<div onClick={this.handleUnselectClick}>Unselect</div>
+						:
+						<div onClick={this.handleSelectClick} >Select</div>
+					}
+				</Menu>
+
 				<ul>
 					{this.props.story.list.map((index, key) => {
 						return <ListItem key={key} data={index} handlePress={this.handlePress}>
-							<button className="btnDelete" data-uuid={index.uuid} onClick={this.handleDelete}><img src={trash} alt="icon trash"/></button>
+							
+							{
+								this.state.showSelectBoxes ? 
+								<div {...listselect} className="listSelect">
+									<input type="checkbox" />
+								</div>
+								: null
+							}					
+
 						</ListItem>
 					})}
+
 					<li>
 						<Link to={'/Create'} className="button">+</Link>
 					</li>
+
 				</ul>
+
 			</div>
 		)
 	}

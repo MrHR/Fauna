@@ -37,6 +37,7 @@ h1, h2 {
     color:var(--headerColor);
     font-size:1.8em;
     font-weight:bold;
+    display:inline-block;
 }
 
 h3 {
