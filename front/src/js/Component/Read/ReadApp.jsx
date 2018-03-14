@@ -25,7 +25,6 @@ class ReadApp extends Component {
       <div {...Container}>
         <div {...StoryCreaterContainer}>
           <Route path={'/'} exact component={ListApp} />
-
         </div>
       </div>
     )

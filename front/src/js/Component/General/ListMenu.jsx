@@ -28,8 +28,8 @@ const menu = css({
   position:'absolute',
   zIndex:'1000',
   backgroundColor:'white',
-  right:'20px',
-  top:'20px',
+  right:'0',
+  top:'0',
   width:'140px',
   textAlign:'center',
   boxSizing:'border-box',
@@ -62,7 +62,6 @@ export default class ListMenu extends Component {
   }
   
   toggleMenu(e) {
-    console.log('toggle menu');
 		this.setState(prevState => ({
 			showMenu: !prevState.showMenu
 		}));

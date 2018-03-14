@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { css } from 'glamor';
+import { css, select } from 'glamor';
 import { Link } from 'react-router-dom';
 import '../../../../css/style.css';
 import Hammer from 'react-hammerjs';
@@ -41,12 +41,20 @@ const listselect = css({
 const listTools = css({
 	float:'right',
 	position:'relative',
-	top:'10px',
+	top:'8px',
 	right:'30px',
+	maxWidth:'0',
+	width:'auto',
+	visibility:'hidden',
+	textAlign:'right',
+	transition:'500ms all',
+	padding:'4px',
+	overflow:'hidden',
+	background:'#cfcfcf',
 	'> button' : {
 		border:'none',
 		background:'transparent',
-		width:'30px',
+		width:'27px',
 		opacity:'0.5',
 		cursor:'pointer',
 		':hover' : {
@@ -66,12 +74,13 @@ class StoryList extends Component {
 		super();
 
 		this.state = {
-			showSelectBoxes: false
+			showSelectBoxes: false,
+			selectedStories: []
 		}
 
 		this.handleDelete = this.handleDelete.bind(this)
 		this.handleSelectClick = this.handleSelectClick.bind(this)
-		this.handleUnselectClick = this.handleUnselectClick.bind(this)
+		this.handleInputChange = this.handleInputChange.bind(this)
 	}
 
 	componentDidMount() {
@@ -80,36 +89,59 @@ class StoryList extends Component {
 	}
 
 	handleDelete(e) {
-		console.log('deleted', e.currentTarget.dataset.key);
-		this.props.deleteItem(e.currentTarget.dataset.uuid);
+		if(this.state.selectedStories.length > 0) { 
+			this.state.selectedStories.forEach((storyId) => {
+				this.props.deleteItem(storyId)
+			})
+		}
 	}
 
 	handleSelectClick() {
-		this.setState({
-			showSelectBoxes:true
-		})
+		this.setState(prevState => ({
+			showSelectBoxes:!prevState.showSelectBoxes
+		}))
+
+		if(this.state.showSelectBoxes) {
+			document.getElementById("listTools").classList.remove('slideLeft200');
+		} else {
+			document.getElementById('listTools').classList.add('slideLeft200');
+		}
 	}
 
-	handleUnselectClick() {
-		this.setState({
-			showSelectBoxes:false
-		})
-	}
+	handleInputChange(event) {
+		const target = event.target;
+
+		if(target.type === 'checkbox' && target.checked) {
+			this.setState(prevState => ({
+				selectedStories: [...prevState.selectedStories, target.dataset.key]
+			}));
+		} else {
+			const array = this.state.selectedStories;
+			const index = this.state.selectedStories.indexOf(target.dataset.key);
+			if(index > -1) {
+				array.splice(index, 1);
+			}			
+
+			this.setState({
+				selectedStories: array
+			});
+		}
+  }
 
 	render() {
 		return (
 			<div className={'page'}>
 				<h2>Stories</h2>
 
-				<div {...listTools}>
+				<div id="listTools" {...listTools}>
 						<button className="btnDelete" onClick={this.handleDelete}>
 							<img src={trash} alt="icon trash"/>
 						</button>
 				</div>
-				
+
 				<Menu>
 					{ this.state.showSelectBoxes ?
-						<div onClick={this.handleUnselectClick}>Unselect</div>
+						<div onClick={this.handleSelectClick}>Unselect</div>
 						:
 						<div onClick={this.handleSelectClick} >Select</div>
 					}
@@ -117,12 +149,12 @@ class StoryList extends Component {
 
 				<ul>
 					{this.props.story.list.map((index, key) => {
-						return <ListItem key={key} data={index} handlePress={this.handlePress}>
+						return <ListItem key={key} data={index}>
 							
 							{
 								this.state.showSelectBoxes ? 
 								<div {...listselect} className="listSelect">
-									<input type="checkbox" />
+									<input type="checkbox" data-key={index.uuid} onChange={this.handleInputChange}/>
 								</div>
 								: null
 							}					
