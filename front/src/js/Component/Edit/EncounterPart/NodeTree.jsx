@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'glamor';
 
-import { EncounterPartSelectActive } from './../../../Actions/EncounterPartActions'
+import { EncounterPartSelectActive, EncounterPartGetNodeTree } from './../../../Actions/EncounterPartActions'
 
 const Tree = css({
   display:'block',
@@ -37,15 +37,32 @@ class NodeTree extends Component {
       lineMiddle: (width/2)/width*100,
       rectMiddle:(width/2)/width*100 - (rectWidth/2),
     });
-
-    console.log('state', this.props.story)
-
-
   }
   
 	render() {
 
-    console.log('story in return', this.props.story)
+  //   // console.log('story in return', this.props.encounterParts)
+  //   console.log('part list', this.props)
+
+  //   const list = this.props.encounterParts.list;
+  //   const active = this.props.encounterParts.active;
+  //   let parents = 0;
+  //   let children = 0;
+  //   let siblings = 0;
+
+  //   // list.filter(function (item) {
+  //   //   switch(item.follows) {
+  //   //     case :
+  //   //       parents++
+  //   //       break;
+  //   //     case active:
+  //   //       children++;
+  //   //       break;
+  //   //     case 
+  //   //   }
+  //   // });
+
+    //console.log('pars', parents)
 
     const x = this.state.lineMiddle,
     rx = this.state.rectMiddle,
@@ -78,6 +95,12 @@ class NodeTree extends Component {
                 <line className="con_vert" x1={x+offset} y1={y*2} x2={x+offset} y2={y*3} stroke="black"  strokeWidth="0.1"/>
                 <rect className="rect" x={rx+offset} y={y*3} width={rectWidth} height={rectHeight}/>
               </g>
+
+              <g className="minimap_encounterpart minimap_encounterpart_right">
+                <line className="con_hor" x1={x+offset*2} y1={y*2} x2={x+offset} y2={y*2} stroke="black"  strokeWidth="0.1"/>
+                <line className="con_vert" x1={x+offset*2} y1={y*2} x2={x+offset*2} y2={y*3} stroke="black"  strokeWidth="0.1"/>
+                <rect className="rect" x={rx+offset*2} y={y*3} width={rectWidth} height={rectHeight}/>
+              </g>
             </g>
 					</g>
 				</svg>
@@ -102,7 +125,8 @@ export default connect(
 	}, 
 	dispatch => {
 		return {
-			selectEncounterPart: (id) => dispatch(EncounterPartSelectActive(id))
+      selectEncounterPart: (id) => dispatch(EncounterPartSelectActive(id)),
+      //getNodeTree: (id) => dispatch(EncounterPartGetNodeTree(id))
 		}
 	}
 )(NodeTree)

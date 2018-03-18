@@ -62,14 +62,12 @@ export function EncounterPartsReducer(state = initialState, action) {
 			}
 			
 	    case ENCOUNTER_PART_CREATE_ITEM:
-	      console.log("init")
 	      return {
 	        ...state,
 	        loading: true
 	      }
 
 	    case ENCOUNTER_PART_CREATE_ITEM_SUCCESS:
-	      console.log("init")
 	      return {
 	        ...state,
 	        created: action.data,
@@ -79,7 +77,8 @@ export function EncounterPartsReducer(state = initialState, action) {
 	     case ENCOUNTER_PART_SELECT_ACTIVE:
 	     	return {
 	     		...state,
-	     		active: action.id
+					 active: action.id,
+					 active_follows: action.follows
 	     	}
 
 		default: 

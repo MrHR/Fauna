@@ -15,7 +15,6 @@ class Story {
     
 
      app.get('/encounterparts/:uuid', async(req, res, next) => {
-      console.log("init")
       pg.select('*').table('encounter_part').where({encounter_uuid: req.params.uuid}).then((data) => {
         res.send(200, data)
       })
@@ -23,7 +22,6 @@ class Story {
 
 
      app.post('/encounterpart', async(req, res, next) => {
-      console.log("init")
       const data = {
         uuid: uuidV1(),
         cta: req.body.cta,
@@ -37,17 +35,13 @@ class Story {
     })
 
     app.get('/encounter/story/:uuid', async(req, res, next) => {
-      console.log(req.params.uuid)
       pg.select('*').table('encounter').where({story_uuid: req.params.uuid}).then((data) => {
-        console.log(data.length)
         res.send(200, data)
       })
     })
 
 
     app.post('/encounter', async(req, res, next) => {
-      console.log(req.body)
-
       const start = req.body.start;
       const results = [];
       const toInsert = {

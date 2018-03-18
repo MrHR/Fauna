@@ -53,14 +53,12 @@ export function StoryReducer(state = initialState, action) {
 				detail: action.data
 			}
 	    case STORY_CREATE_ITEM:
-	      console.log("init")
 	      return {
 	        ...state,
 	        loading: true
 	      }
 
 	    case STORY_CREATE_ITEM_SUCCESS:
-	      console.log("init")
 	      return {
 	        ...state,
 	        created: action.data,

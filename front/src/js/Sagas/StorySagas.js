@@ -42,8 +42,6 @@ function* storyCreateItem(action) {
 }
 
 function* storyDeleteItem(action) {
-  console.log('deletedata', action);
-
   try {
     const result = yield axios({
       method:'post',

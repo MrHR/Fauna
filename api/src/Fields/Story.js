@@ -12,14 +12,12 @@ class Story {
     });
 
     app.get('/story/:uuid', async(req, res, next) => {
-      console.log(req.params.uuid)
       pg.select('*').table('story').where({uuid: req.params.uuid}).then((data) => {
         res.send(200, data[0])
       })
     });
 
     app.post('/story', async(req, res, next) => {
-      console.log(req.body)
       const results = [];
       const toInsert = {
         uuid: uuidV1(),
@@ -28,8 +26,6 @@ class Story {
       }
       
       pg.insert(toInsert).table('story').returning(["uuid", "title", "description"]).then((result) => {
-        console.log('result', result[0])
-
         res.send(200, { created: result[0]});
       }).catch((error) => {
         res.send(400, { message: error })
@@ -39,7 +35,6 @@ class Story {
 
     app.post('/story/:uuid', async(req, res, next) => {
       pg.del().table('story').where({uuid: req.params.uuid}).then((result) => {
-        console.log('result deleted', result[0])
         res.send(200, { created: result[0]})
       }).catch((error) => {
         res.send(400, { message: error })

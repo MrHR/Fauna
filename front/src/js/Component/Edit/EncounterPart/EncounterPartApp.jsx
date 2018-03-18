@@ -47,6 +47,9 @@ class EncounterPartApp extends Component {
 	}
 
 	render() {
+
+		// console.log('parts', this.props.encounterParts);
+
 		const { list } = this.props.encounterParts;
 		const display = list.map((index, key) => {
 			if(this.props.encounterParts.active && index.uuid === this.props.encounterParts.active){

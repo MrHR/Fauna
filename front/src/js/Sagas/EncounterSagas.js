@@ -35,8 +35,6 @@ function* encounterCreateItem(action) {
         data: action.data
       })
 
-      console.log('data', result.data);
-
       yield put({type: "ENCOUNTER_FETCH_LIST", data: action.data.story_uuid});
       yield put({type: "ENCOUNTER_CREATE_ITEM_SUCCESS", data: result.data.created});
    } catch (e) {

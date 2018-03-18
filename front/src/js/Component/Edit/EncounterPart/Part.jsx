@@ -60,7 +60,7 @@ class Part extends Component {
 					{this.props.data.story_text}
 				</div>
 
-				<CreateFollow />
+				<CreateFollow/>
 
 				<h4>Encounter Parts</h4>
 				<ul>
