@@ -86,6 +86,8 @@ class StoryList extends Component {
 	componentDidMount() {
 		this.props.fetchList();
 		document.addEventListener('onmousedown', this.toggleMenu);
+
+		console.log('process: ', process.env)
 	}
 
 	handleDelete(e) {
@@ -100,6 +102,8 @@ class StoryList extends Component {
 		this.setState(prevState => ({
 			showSelectBoxes:!prevState.showSelectBoxes
 		}))
+
+
 
 		if(this.state.showSelectBoxes) {
 			document.getElementById("listTools").classList.remove('slideLeft200');

@@ -9,7 +9,7 @@ services:
     ports:
       - ${FRONT_PORT}:3000
     environment:
-      REACT_APP_API_URL: "http://${REACT_APP_API_URL}:${BACK_PORT}/"
+      REACT_APP_API_URL: "http://${REACT_APP_URL}:${BACK_PORT}/"
   store:
     ports:
       - ${STORE_PORT}:5432

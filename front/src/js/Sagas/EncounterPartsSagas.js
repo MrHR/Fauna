@@ -5,7 +5,7 @@ function* encounterFetchList(action) {
    try {
       const result = yield axios({
         method: 'get',
-        url: `http://${process.env.REACT_APP_API_URL}:3000/encounterparts/${action.data}`
+        url: `${process.env.REACT_APP_API_URL}/encounterparts/${action.data}`
       })
       yield put({type: "ENCOUNTER_PART_FETCH_LIST_SUCCESS", data: result.data});
    } catch (e) {
@@ -18,7 +18,7 @@ function* encounterFetchItem(action) {
    try {
       const result = yield axios({
         method: 'get',
-        url: `http://${process.env.REACT_APP_API_URL}:3000/encounterparts/${action.uuid}`
+        url: `${process.env.REACT_APP_API_URL}/encounterparts/${action.uuid}`
       })
       yield put({type: "ENCOUNTER_PART_FETCH_ITEM_SUCCESS", data: result.data});
    } catch (e) {
@@ -31,7 +31,7 @@ function* encounterCreateItem(action) {
    try {
       const result = yield axios({
         method: 'post',
-        url: `http://${process.env.REACT_APP_API_URL}:3000/encounterpart`,
+        url: `${process.env.REACT_APP_API_URL}/encounterpart`,
         data: action.data
       })
       yield put({type: "ENCOUNTER_PART_FETCH_LIST", data: action.data.encounter_uuid});
@@ -45,7 +45,7 @@ function* encounterPartGetNodeList(action) {
   try {
     const result = yield axios({
       method: 'get',
-      url: `http://${process.env.REACT_APP_API_URL}:3000/encounterpartnodetree`,
+      url: `${process.env.REACT_APP_API_URL}/encounterpartnodetree`,
       data: action.data
     })
     yield put({type: "ENCOUNTER_PART_GET_NODE_TREE_SUCCESS", data: result.data})

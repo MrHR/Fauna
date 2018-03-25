@@ -5,7 +5,7 @@ function* storyFetchList(action) {
    try {
       const result = yield axios({
         method: 'get',
-        url: `http://${process.env.REACT_APP_API_URL}:3000/story`
+        url: `${process.env.REACT_APP_API_URL}/story`
       })
       yield put({type: "STORY_FETCH_LIST_SUCCESS", data: result.data});
    } catch (e) {
@@ -18,7 +18,7 @@ function* storyFetchItem(action) {
    try {
       const result = yield axios({
         method: 'get',
-        url: `http://${process.env.REACT_APP_API_URL}:3000/story/${action.uuid}`
+        url: `${process.env.REACT_APP_API_URL}/story/${action.uuid}`
       })
       yield put({type: "STORY_FETCH_ITEM_SUCCESS", data: result.data});
    } catch (e) {
@@ -31,7 +31,7 @@ function* storyCreateItem(action) {
    try {
       const result = yield axios({
         method: 'post',
-        url: `http://${process.env.REACT_APP_API_URL}:3000/story`,
+        url: `${process.env.REACT_APP_API_URL}/story`,
         data: action.data
       })
       yield put({type: "STORY_FETCH_LIST"});
@@ -45,7 +45,7 @@ function* storyDeleteItem(action) {
   try {
     const result = yield axios({
       method:'post',
-      url:`http://${process.env.REACT_APP_API_URL}:3000/story/${action.uuid}`
+      url:`${process.env.REACT_APP_API_URL}/story/${action.uuid}`
     })
     yield put({type: "STORY_FETCH_LIST"});
     yield put({type: "STORY_DELETE_ITEM_SUCCESS", data: result.data.deleted});
