@@ -34,6 +34,7 @@ class Create extends Component {
 			description: ''
 		}
 	}
+	
 	handleSubmit() {
 		const data = this.state;
 		data['story_uuid'] = this.props.story.detail.uuid;

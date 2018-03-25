@@ -12,7 +12,11 @@ import {
 	ENCOUNTER_PART_CREATE_ITEM_SUCCESS,
 	ENCOUNTER_PART_CREATE_ITEM_FAILED,
 
-	ENCOUNTER_PART_SELECT_ACTIVE
+	ENCOUNTER_PART_SELECT_ACTIVE,
+
+	ENCOUNTER_PART_GET_NODE_TREE,
+	ENCOUNTER_PART_GET_NODE_TREE_SUCCESS
+
 } from './../Actions/EncounterPartActions';
 
 import {
@@ -74,12 +78,25 @@ export function EncounterPartsReducer(state = initialState, action) {
 	        loading: false
 	      }
 
-	     case ENCOUNTER_PART_SELECT_ACTIVE:
+			case ENCOUNTER_PART_SELECT_ACTIVE:
 	     	return {
 	     		...state,
 					 active: action.id,
 					 active_follows: action.follows
-	     	}
+				}
+				 
+			case ENCOUNTER_PART_GET_NODE_TREE:
+				return {
+					...state,
+					loading: true
+				}	
+
+			case ENCOUNTER_PART_GET_NODE_TREE_SUCCESS:
+				return {
+					...state,
+					loading: false,
+					detail:	action.data
+				}	
 
 		default: 
 			return state;
