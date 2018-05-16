@@ -8,11 +8,6 @@ import Part from './Part'
 import { EncounterPartFetchList } from './../../../Actions/EncounterPartActions';
 import { EncounterFetchItem } from './../../../Actions/EncounterActions';
 import { StoryFetchItem } from './../../../Actions/StoryActions';
-import NodeTree from './NodeTree';
-
-const Header = css({
-	display:'inline-block'
-})
 
 const formField = css({
 	display: 'block',
@@ -47,9 +42,6 @@ class EncounterPartApp extends Component {
 	}
 
 	render() {
-
-		// console.log('parts', this.props.encounterParts);
-
 		const { list } = this.props.encounterParts;
 		const display = list.map((index, key) => {
 			if(this.props.encounterParts.active && index.uuid === this.props.encounterParts.active){
@@ -59,8 +51,7 @@ class EncounterPartApp extends Component {
 
 		return (
 			<div>
-				<h3 {...Header}>{this.props.story.detail ? this.props.story.detail.title : '(Loading)'}</h3>
-				<NodeTree/>
+				<h3>{this.props.story.detail ? this.props.story.detail.title : '(Loading)'}</h3>
 				{display}
 			</div>
 		)

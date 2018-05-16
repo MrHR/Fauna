@@ -2,8 +2,7 @@
   "name": "fauna",
   "version": "0.1.0",
   "dependencies": {
-    "debug": "^3.1.0",
-    "react-hammerjs": "^1.0.1"
+    "debug": "^3.1.0"
   },
   "devDependencies": {
     "npm-run-all": "4.1.1",

@@ -18,6 +18,7 @@ class CreateApp extends Component {
 
 
   render() {
+    console.log(this.props.match)
     return (
       <div {...Container}>
         <div {...StoryCreaterContainer} className="page">

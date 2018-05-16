@@ -14,10 +14,6 @@ export const ENCOUNTER_PART_CREATE_ITEM_FAILED = 'ENCOUNTER_PART_CREATE_ITEM_FAI
 
 export const ENCOUNTER_PART_SELECT_ACTIVE = 'ENCOUNTER_PART_SELECT_ACTIVE';
 
-export const ENCOUNTER_PART_GET_NODE_TREE = 'ENCOUNTER_PART_GET_NODE_TREE';
-export const ENCOUNTER_PART_GET_NODE_TREE_SUCCESS = 'ENCOUNTER_PART_GET_NODE_TREE_SUCCESS';
-export const ENCOUNTER_PART_GET_NODE_TREE_FAILED = 'ENCOUNTER_PART_GET_NODE_TREE_FAILED';
-
 
 export function EncounterPartFetchList(data) {
   return {
@@ -26,6 +22,7 @@ export function EncounterPartFetchList(data) {
   }
 }
 export function EncounterPartCreateItem(data) {
+	console.log( data)
   return {
     type: ENCOUNTER_PART_CREATE_ITEM,
     data
@@ -37,11 +34,4 @@ export function EncounterPartSelectActive(id) {
 		type: ENCOUNTER_PART_SELECT_ACTIVE,
 		id
 	}
-}
-
-export function EncounterPartGetNodeTree(id) {
-  return {
-    type: ENCOUNTER_PART_GET_NODE_TREE,
-    id
-  }
 }

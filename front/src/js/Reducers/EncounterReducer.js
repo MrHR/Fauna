@@ -49,6 +49,7 @@ export function EncounterReducer(state = initialState, action) {
 			}
 			
 	    case ENCOUNTER_CREATE_ITEM:
+	      console.log("init")
 	      return {
 	        ...state,
 					loading: true,
@@ -56,6 +57,7 @@ export function EncounterReducer(state = initialState, action) {
 	      }
 
 	    case ENCOUNTER_CREATE_ITEM_SUCCESS:
+	      console.log("init")
 	      return {
 	        ...state,
 	        created: action.data,

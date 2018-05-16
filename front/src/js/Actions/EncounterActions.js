@@ -21,12 +21,14 @@ export function EncounterFetchList(data) {
   }
 }
 export function EncounterFetchItem(uuid) {
+  console.log(uuid)
   return {
     type: ENCOUNTER_FETCH_ITEM,
     uuid
   }
 }
 export function EncounterCreateItem(data) {
+	console.log( data)
   return {
     type: ENCOUNTER_CREATE_ITEM,
     data
