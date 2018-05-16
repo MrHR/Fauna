@@ -34,11 +34,10 @@ class Create extends Component {
 			description: ''
 		}
 	}
+	
 	handleSubmit() {
 		const data = this.state;
-		console.log("data",data);
 		data['story_uuid'] = this.props.story.detail.uuid;
-		console.log('new data', data);
 		this.props.createItem(data)
 	}
 

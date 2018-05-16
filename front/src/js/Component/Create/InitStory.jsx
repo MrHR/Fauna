@@ -43,7 +43,7 @@ class InitStory extends Component {
 		return (
 
 			<div {...part}>
-				{ this.props.story.created === null ?
+				{/* { this.props.story.created === null ? */}
 					<div>
 						<h2>Create A Story</h2>
 						<div {...formField}>
@@ -56,13 +56,13 @@ class InitStory extends Component {
 						</div>
 						<a className="button" onClick={this.handleSubmit}> Create Story </a>
 					</div>
-				:
-					<div>
-						<h2>{this.props.story.created.title}</h2>
-						<p>{this.props.story.created.description}</p>
-						<a>Edit</a>
-					</div>
-				}
+				{/* :
+				// 	<div>
+				// 		<h2>{this.props.story.created.title}</h2>
+				// 		<p>{this.props.story.created.description}</p>
+				// 		<a>Edit</a>
+				// 	</div>
+				// } */}
 
 				{fireRedirect && (
           <Redirect to={'/'}/>

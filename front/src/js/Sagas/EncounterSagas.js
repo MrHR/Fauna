@@ -5,7 +5,7 @@ function* encounterFetchList(action) {
    try {
       const result = yield axios({
         method: 'get',
-        url: `http://localhost:3000/encounter/story/${action.data}`
+        url: `${process.env.REACT_APP_API_URL}/encounter/story/${action.data}`
       })
       yield put({type: "ENCOUNTER_FETCH_LIST_SUCCESS", data: result.data});
    } catch (e) {
@@ -18,7 +18,7 @@ function* encounterFetchItem(action) {
    try {
       const result = yield axios({
         method: 'get',
-        url: `http://localhost:3000/encounter/${action.uuid}`
+        url: `${process.env.REACT_APP_API_URL}/encounter/${action.uuid}`
       })
       yield put({type: "ENCOUNTER_FETCH_ITEM_SUCCESS", data: result.data});
    } catch (e) {
@@ -31,11 +31,9 @@ function* encounterCreateItem(action) {
    try {
       const result = yield axios({
         method: 'post',
-        url: `http://localhost:3000/encounter`,
+        url: `${process.env.REACT_APP_API_URL}/encounter`,
         data: action.data
       })
-
-      console.log('data', result.data);
 
       yield put({type: "ENCOUNTER_FETCH_LIST", data: action.data.story_uuid});
       yield put({type: "ENCOUNTER_CREATE_ITEM_SUCCESS", data: result.data.created});

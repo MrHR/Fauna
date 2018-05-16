@@ -7,6 +7,7 @@
     --baseColor:rgb(46, 46, 46);
     --white: white;
     --headerColor: rgb(216, 216, 216);
+    --subheaderColor:rgb(55, 212, 152);
     --textColor: #888;
 }
 
@@ -37,6 +38,7 @@ h1, h2 {
     color:var(--headerColor);
     font-size:1.8em;
     font-weight:bold;
+    display:inline-block;
 }
 
 h3 {
@@ -128,6 +130,7 @@ form input:focus, form textarea:focus {
     margin:5px 0;
     color:var(--headerColor);
     height:auto;
+    position:relative;
 }
 
 .listItem a {
@@ -172,6 +175,26 @@ form input:focus, form textarea:focus {
     color:var(--textColor);
 }
 
+.listItem:hover .btnDelete {
+    display:block;
+}
+
+.listItem .btnDelete {
+    background-color:transparent;
+	border:none;
+	width:28px;
+	position:absolute;
+	top:5px;
+	right:2px;
+    display:none;
+    cursor:pointer;
+}
+
+.listItem .btnDelete img {
+    width:100%;
+    opacity:0.5;
+}
+
 /*#region popover*/
 
 .popoverWrapper {
@@ -201,6 +224,28 @@ form input:focus, form textarea:focus {
     border-radius:var(--borders) var(--borders) 0 0 ;
     text-transform:capitalize;
     box-shadow:0 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+/*#endregion*/
+
+/*#region animation*/
+
+.slideLeft200 {
+    visibility: visible;
+    max-width:150px;
+}
+
+/*#endregion*/
+
+/*#region nodeTree*/
+
+.nodeTree {
+    width:100%;
+    color:var(--hightlightColor);
+}
+
+.nodeTree .rect {
+    fill:currentColor;
 }
 
 /*#endregion*/
