@@ -78,8 +78,10 @@ class Story {
     })
 
     app.get('/encounterpartnodetree', async(req, res, next) => {
-      pg.select('*').table('encounter_part').where({story_uuid: req.body.story_uuid}).then((data) => {
-        //TODO: meke node tree object
+      pg.select('*').table('encounter_part').where({encounter_uuid: req.body.encounter_uuid}).then((data) => {
+        
+        res.send(200, data[0])
+
       })
     })
 

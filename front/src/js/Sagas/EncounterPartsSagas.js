@@ -45,7 +45,7 @@ function* encounterPartGetNodeList(action) {
   try {
     const result = yield axios({
       method: 'get',
-      url: `http://${process.env.REACT_APP_API_URL}:3000/encounterpartnodetree`,
+      url: `http://${process.env.REACT_APP_API_URL}/encounterpartnodetree`,
       data: action.data
     })
     yield put({type: "ENCOUNTER_PART_GET_NODE_TREE_SUCCESS", data: result.data})
