@@ -46,22 +46,21 @@ class Create extends Component {
 		curState[e.target.name] = e.target.value;
 	}
 
-
 	render() {
 		return (
 			<div>
 				<h4>Create an Encounter</h4>
 				<div>
-					<label htmlFor={'character_uuid'}>character_uuid</label>
-					<input type="text" name="character_uuid" onChange={(e) => this.handleChange(e) } placeholder={'character_uuid'} />
+					<label htmlFor={'character_uuid'}>character</label>
+					<input type="text" name="character_uuid" onChange={(e) => this.handleChange(e) } placeholder={'Character'} />
 				</div>
 				<div>
 					<label htmlFor={'description'}>Description</label>
-					<input type="text" name="description" onChange={(e) => this.handleChange(e)} placeholder={'description'} />
+					<input type="text" name="description" onChange={(e) => this.handleChange(e)} placeholder={'Short description'} />
 				</div>
 				<div>
-					<label htmlFor={'start'}>Description</label>
-					<textarea type="text" name="start" onChange={(e) => this.handleChange(e)} placeholder={'start'}></textarea>
+					<label htmlFor={'start'}>Story</label>
+					<textarea type="text" name="start" onChange={(e) => this.handleChange(e)} placeholder={'The story goes here'}></textarea>
 				</div>
 				<a className={'button'} onClick={this.handleSubmit}> {this.props.encounter.created === null ? <span>Create encounter</span> : <span>saved</span>} </a>
 			</div>

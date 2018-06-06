@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'glamor';
 import { Redirect } from 'react-router';
+import {withRouter} from 'react-router-dom';
 
-import { StoryCreateItem } from './../../Actions/StoryActions'
+import { StoryCreateItem, StoryFetchItem, StoryUpdateItem } from './../../Actions/StoryActions'
 
 const part = css({
 
@@ -16,17 +17,38 @@ const formField = css({
 class InitStory extends Component {
 	constructor() {
 		super()
-		this.handleChange = this.handleChange.bind(this)
-		this.handleSubmit = this.handleSubmit.bind(this)
 		this.state = {
+			uuid: '',
 			title: '',
 			description: '',
 			fireRedirect: false
 		}
+
+		this.handleChange = this.handleChange.bind(this)
+		this.handleSubmit = this.handleSubmit.bind(this)
+		this.handleUpdate = this.handleUpdate.bind(this)
 	}
+
+	componentDidMount() {
+		if(this.props.match.params.uuid !== null) {
+			this.props.fetchItem(this.props.match.params.uuid);
+			this.setState({ uuid: this.props.match.params.uuid })
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if(nextProps.story.detail != this.props.story.detail) {
+			this.setState({
+				title: nextProps.story.detail.title,
+				description: nextProps.story.detail.description
+			})
+		}
+	}
+	
 	handleChange(e) {
-		const curState = this.state;
-		curState[e.target.name] = e.target.value;
+		this.setState({
+			[e.target.name]:e.target.value
+		})
 	}
 
 	handleSubmit() {
@@ -36,33 +58,45 @@ class InitStory extends Component {
 		})
 	}
 
-	render() {
+	handleUpdate() {
+		this.props.updateItem(this.state);
+		this.setState({
+			fireRedirect: true
+		})
+	}
 
+	render() {
 		const { fireRedirect } = this.state;
 
 		return (
-
 			<div {...part}>
-				{/* { this.props.story.created === null ? */}
+				{ !this.props.match.params.uuid ?
+						<div>
+							<h2>Create A Story</h2>
+							<div {...formField}>
+								<label htmlFor={'title'}>Title</label>
+								<input type="text" name="title" onChange={(e) => this.handleChange(e) } placeholder={'title'} />
+							</div>
+							<div {...formField}>
+								<label htmlFor={'description'}>Description</label>
+								<textarea type="text" name="description" onChange={(e) => this.handleChange(e)} placeholder={'description'} />
+							</div>
+							<a className="button" onClick={this.handleSubmit}> Create Story </a>
+						</div>
+					:
 					<div>
-						<h2>Create A Story</h2>
+						<h2>Update your Story</h2>
 						<div {...formField}>
 							<label htmlFor={'title'}>Title</label>
-							<input type="text" name="title" onChange={(e) => this.handleChange(e) } placeholder={'title'} />
+							<input type="text" name="title" onChange={(e) => this.handleChange(e) } placeholder={'title'} value={this.state.title}/>
 						</div>
 						<div {...formField}>
 							<label htmlFor={'description'}>Description</label>
-							<textarea type="text" name="description" onChange={(e) => this.handleChange(e)} placeholder={'description'} />
+							<textarea type="text" name="description" onChange={(e) => this.handleChange(e)} placeholder={'description'}  value={this.state.description}/>
 						</div>
-						<a className="button" onClick={this.handleSubmit}> Create Story </a>
+						<a className="button" onClick={this.handleUpdate}> Update Story </a>
 					</div>
-				{/* :
-				// 	<div>
-				// 		<h2>{this.props.story.created.title}</h2>
-				// 		<p>{this.props.story.created.description}</p>
-				// 		<a>Edit</a>
-				// 	</div>
-				// } */}
+				}
 
 				{fireRedirect && (
           <Redirect to={'/'}/>
@@ -74,7 +108,7 @@ class InitStory extends Component {
 	}
 }	
 
-export default connect(
+export default withRouter(connect(
 	state => {
 		return {
 			story: state.story
@@ -82,7 +116,9 @@ export default connect(
 	}, 
 	dispatch => {
 		return {
-			createItem: (data) => { dispatch( StoryCreateItem(data) )}
+			createItem: (data) => { dispatch( StoryCreateItem(data) )},
+			fetchItem: (data) => { dispatch( StoryFetchItem(data) )},
+			updateItem: (data) => {dispatch( StoryUpdateItem(data) )}
 		}
 	}
-)(InitStory)
+)(InitStory))

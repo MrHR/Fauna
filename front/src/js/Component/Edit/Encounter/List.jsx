@@ -23,9 +23,14 @@ class List extends Component {
 			<div>
 				<h4>Encounters</h4>
 				<ul>
-					{this.props.encounter.list.map((index, key) => {
-						return <Item data={index} key={key} />
-					})}
+					{
+						this.props.encounter.list.length <= 0 ?
+							<p>Add some encounters to see them here</p>
+						:
+							this.props.encounter.list.map((index, key) => {
+								return <Item data={index} key={key} />
+							})
+					}
 				</ul>
 			</div>
 		)

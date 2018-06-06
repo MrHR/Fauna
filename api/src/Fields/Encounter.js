@@ -1,9 +1,10 @@
 const uuidV1 = require('uuid/v1');
+const { requiresLogin } = require('./../Utils/Auth')
 
 
 class Story {
 
-  constructor( app, pg) {
+  constructor( app, pp, pg) {
 
     app.get('/encounter/:uuid', async(req, res, next) => {
       pg.select('*').table('encounter').where({uuid: req.params.uuid}).then((data) => {
@@ -27,7 +28,7 @@ class Story {
       });
     });
 
-    app.post('/encounterpart', async(req, res, next) => {
+    app.post('/encounterpart', requiresLogin, async(req, res, next) => {
       const data = {
         uuid: uuidV1(),
         cta: req.body.cta,
@@ -47,7 +48,7 @@ class Story {
     });
 
 
-    app.post('/encounter', async(req, res, next) => {
+    app.post('/encounter', requiresLogin, async(req, res, next) => {
       const start = req.body.start;
       const results = [];
       const toInsert = {

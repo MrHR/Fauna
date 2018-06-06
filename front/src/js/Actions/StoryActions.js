@@ -3,15 +3,22 @@
 export const STORY_FETCH_LIST = 'STORY_FETCH_LIST';
 export const STORY_FETCH_LIST_SUCCESS = 'STORY_FETCH_LIST_SUCCESS';
 export const STORY_FETCH_LIST_FAILED = 'STORY_FETCH_LIST_FAILED';
+
 export const STORY_FETCH_ITEM = 'STORY_FETCH_ITEM';
 export const STORY_FETCH_ITEM_SUCCESS = 'STORY_FETCH_ITEM_SUCCESS';
 export const STORY_FETCH_ITEM_FAILED = 'STORY_FETCH_ITEM_FAILED';
+
 export const STORY_CREATE_ITEM = 'STORY_CREATE_ITEM';
 export const STORY_CREATE_ITEM_SUCCESS = 'STORY_CREATE_ITEM_SUCCESS';
 export const STORY_CREATE_ITEM_FAILED = 'STORY_CREATE_ITEM_FAILED';
+
 export const STORY_DELETE_ITEM = 'STORY_DELETE_ITEM';
 export const STORY_DELETE_ITEM_SUCCESS = 'STORY_DELETE_ITEM_SUCCESS';
 export const STORY_DELETE_ITEM_FAILED = 'STORY_DELETE_ITEM_FAILED';
+
+export const STORY_UPDATE_ITEM = 'STORY_UPDATE_ITEM';
+export const STORY_UPDATE_ITEM_SUCCESS = 'STORY_UPDATE_ITEM_SUCCESS';
+export const STORY_UPDATE_ITEM_FAILED = 'STORY_UPDATE_ITEM_FAILED';
 
 
 export function StoryFetchList(data) {
@@ -38,5 +45,12 @@ export function StoryDeleteItem(uuid) {
   return {
     type: STORY_DELETE_ITEM,
     uuid
+  }
+}
+
+export function StoryUpdateItem(data) {
+  return {
+    type: STORY_UPDATE_ITEM,
+    data
   }
 }

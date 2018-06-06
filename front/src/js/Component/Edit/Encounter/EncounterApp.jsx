@@ -25,8 +25,8 @@ class EncounterPartApp extends Component {
 				{ this.props.story.detail ? 
 					<span>
 						<h3 {...header}>{this.props.story.detail.title}</h3>
-						<Create />
 						<List uuid={this.props.match.params.uuid} />
+						<Create />
 					</span>
 				: <span>loading</span> }
 			</div>

@@ -1,14 +1,11 @@
 
 const Login = require('./Login');
 const Register = require('./Register');
-const Profile = require('./Profile');
-
 
 class User {
-  constructor( app, pg ) {
-    new Login(app, pg);
-    new Register(app, pg);
-    new Profile(app, pg);
+  constructor( app, pp, pg ) {
+    new Login(app, pp, pg);
+    new Register(app, pp, pg);
   }
 
 }

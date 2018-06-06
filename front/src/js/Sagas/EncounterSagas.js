@@ -1,6 +1,6 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import axios from 'axios'
-
+import Auth from './../Modules/Auth';
 function* encounterFetchList(action) {
    try {
       const result = yield axios({
@@ -31,6 +31,7 @@ function* encounterCreateItem(action) {
    try {
       const result = yield axios({
         method: 'post',
+        headers: { Authorization: `${Auth.getToken()}` },
         url: `${process.env.REACT_APP_API_URL}/encounter`,
         data: action.data
       })
