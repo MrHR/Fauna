@@ -28,7 +28,8 @@ const initialState = {
 	created: null,
 	loading: false,
 	detail: null,
-	active: null
+	active: null,
+	nodeTree: null
 }
 
 export function EncounterPartsReducer(state = initialState, action) {
@@ -95,7 +96,7 @@ export function EncounterPartsReducer(state = initialState, action) {
 				return {
 					...state,
 					loading: false,
-					detail:	action.data
+					nodeTree:	action.data
 				}	
 
 		default: 

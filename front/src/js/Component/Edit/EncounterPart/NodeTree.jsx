@@ -5,26 +5,6 @@ import Tree from 'react-d3-tree';
 
 import { EncounterPartSelectActive, EncounterPartGetNodeTree } from './../../../Actions/EncounterPartActions'
 
-const myTreeData = [
-  {
-    name: '',
-    attributes: {
-    },
-    children: [
-      {
-        name: '',
-        attributes: {
-        },
-      },
-      {
-        name: '',
-        attributes: {
-        },
-      },
-    ],
-  },
-];
-
 const svgSquare = {
   shape: 'rect',
   shapeProps: {
@@ -32,14 +12,14 @@ const svgSquare = {
     height:10,
     x:-7.5,
     y:-5,
-    fill: '#37d498',
+    fill: '#888',
     strokeWidth:0
   }
 }
 
 const containerStyles = {
   width: '100%',
-  height: '100px',
+  height: '200px',
 }
 
 const styling = {
@@ -66,21 +46,24 @@ class NodeTree extends Component {
   }
   
 	render() {
+    console.log('node tree',this.props.encounterParts.nodeTree )
 		return (
       <div style={containerStyles} ref={tc => (this.treeContainer = tc)}>
-        <Tree 
-          data={myTreeData} 
-          orientation={'vertical'} 
-          nodeSvgShape={svgSquare}
-          pathFunc={'elbow'}
-          collapsible={false}
-          zoomable={false}
-          transitionDuration={0}
-          translate={this.state.translate}
-          depthFactor={20}
-          separation={{siblings: 0.4, nonSiblings: 0.4}}
-          styles={styling}
-        />
+        { this.props.encounterParts.nodeTree ? 
+          <Tree 
+            data={this.props.encounterParts.nodeTree} 
+            orientation={'vertical'} 
+            nodeSvgShape={svgSquare}
+            pathFunc={'elbow'}
+            collapsible={false}
+            zoomable={false}
+            transitionDuration={0}
+            translate={this.state.translate}
+            depthFactor={20}
+            separation={{siblings: 0.4, nonSiblings: 0.4}}
+            styles={styling}
+          />
+          : null }
       </div>
 		)
 	}
@@ -96,8 +79,6 @@ export default connect(
 	}, 
 	dispatch => {
 		return {
-      //selectEncounterPart: (id) => dispatch(EncounterPartSelectActive(id)),
-      //getNodeTree: (id) => dispatch(EncounterPartGetNodeTree(id))
 		}
 	}
 )(NodeTree)

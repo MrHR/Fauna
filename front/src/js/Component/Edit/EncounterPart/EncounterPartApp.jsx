@@ -34,22 +34,41 @@ const part = css({
 })
 
 class EncounterPartApp extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
+		this.state = {
+			encounterPart_uuid: null,
+			fetchedList: false
+		};
 	}
 
 	componentDidMount() {
 		this.props.fetchItem(this.props.match.params.encounter_uuid)
-		this.props.fetchList(this.props.match.params.encounter_uuid)
+		this.props.fetchList({
+			encounter_uuid: this.props.match.params.encounter_uuid,
+			encounterPart_uuid: this.state.encounterPart_uuid
+		})
 		this.props.fetchStoryItem(this.props.match.params.uuid)
+	}
 
+	componentWillReceiveProps() {
+		if(!this.state.fetchedList && !this.state.encounterPart_uuid)
+			this.setState({encounterPart_uuid: this.props.encounterParts.active});
+
+		if(!this.state.fetchedList && this.state.encounterPart_uuid) {
+			this.props.fetchList({
+				encounter_uuid: this.props.match.params.encounter_uuid,
+				encounterPart_uuid: this.state.encounterPart_uuid
+			});
+
+			this.setState({
+				fetchedList: true
+			});
+		}
 		
 	}
 
 	render() {
-
-		// console.log('parts', this.props.encounterParts);
-
 		const { list } = this.props.encounterParts;
 		const display = list.map((index, key) => {
 			if(this.props.encounterParts.active && index.uuid === this.props.encounterParts.active){
