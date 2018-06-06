@@ -13,6 +13,8 @@ import {
 	ENCOUNTER_PART_CREATE_ITEM_FAILED,
 
 	ENCOUNTER_PART_SELECT_ACTIVE,
+	ENCOUNTER_PART_SELECT_ACTIVE_SUCCESS,
+	ENCOUNTER_PART_SELECT_ACTIVE_FAILED,
 
 	ENCOUNTER_PART_GET_NODE_TREE,
 	ENCOUNTER_PART_GET_NODE_TREE_SUCCESS
@@ -82,8 +84,14 @@ export function EncounterPartsReducer(state = initialState, action) {
 			case ENCOUNTER_PART_SELECT_ACTIVE:
 	     	return {
 	     		...state,
+					 loading:true
+				}
+
+			case ENCOUNTER_PART_SELECT_ACTIVE_SUCCESS:
+	     	return {
+	     		...state,
 					 active: action.id,
-					 active_follows: action.follows
+					 active_follows: action.data.follows
 				}
 				 
 			case ENCOUNTER_PART_GET_NODE_TREE:

@@ -3,23 +3,29 @@ const uuidV1 = require('uuid/v1');
 
 class Story {
 
-  constructor( app, pg ) {
+  constructor( app, pg) {
 
     app.get('/encounter/:uuid', async(req, res, next) => {
       pg.select('*').table('encounter').where({uuid: req.params.uuid}).then((data) => {
         res.status(200).send(data[0]);
       }).catch((error) => {
-        res.send(400, error);
+        res.status(400).send(error);
       });
     });
-    
+
+    app.get('/encounterpart/:uuid', async(req, res, next) => {
+      pg.select('*').table('encounter_part').where({uuid: req.params.uuid}).then((data) => {
+        res.status(200).send(data[0]);
+      }).catch((error) => {
+        res.status(400).send(error);
+      });
+    });
 
     app.get('/encounterparts/:uuid', async(req, res, next) => {
       pg.select('*').table('encounter_part').where({encounter_uuid: req.params.uuid}).then((data) => {
-        res.status(200).send( data);
+        res.status(200).send(data);
       });
     });
-
 
     app.post('/encounterpart', async(req, res, next) => {
       const data = {
@@ -29,8 +35,8 @@ class Story {
         story_text: req.body.story_text,
         encounter_uuid: req.body.encounter_uuid
       }
-      pg.insert(data).table('encounter_part').returning([ 'uuid', 'cta', 'follows' ]).then((data) => {
-        res.send(200, data);
+      pg.insert(data).table('encounter_part').returning([ 'uuid', 'cta', 'follows', 'encounter_uuid' ]).then((data) => {
+        res.status(200).send(data);
       });
     });
 
@@ -72,34 +78,30 @@ class Story {
           res.send(400);
         })
       }).catch((error) => {
-        res.send(400, { message: error });
+        res.status(400).send( { message: error });
       });
       
     });
 
-    app.post('/encounterpartnodetree', async(req, res, next) => {
-      await pg.select('*').table('encounter_part').where({encounter_uuid: req.body.encounter_uuid}).then(async (data) => {
-        const main = [{ name: '', attributes: {}, children: []}];
+    app.get('/encounterpartnodetree/:encounterID', async(req, res, next) => {
+      
+      await pg.select('*').table('encounter_part').where({encounter_uuid: req.params.encounterID}).then(async (data) => {
+        const main = [];
         const topLevel = data.filter(part => part.follows === null);
-        console.log('data',req.body)
+        const nodeSvgShape = {
+          shape: 'rect',
+          shapeProps: {
+            width:15,
+            height:10,
+            x:-7.5,
+            y:-5,
+            fill: '#888',
+            strokeWidth:0
+          }
+        };
 
         topLevel.forEach(child => {
-          if(child.uuid === req.body.encounterPart_uuid) {
-            console.log('hit')
-            main[0].children.push(this.findChilds(
-              child.uuid, 
-              data, 
-              {name: '', attributes: {}, nodeSvgShape: { shape: 'rect', shapeProps: { fill: 'blue', width: 15, height: 10, x:-7.5, y:-5, fill: '#37d498', strokeWidth:0 }}, children: []}, 
-              req.body.encounterPart_uuid
-            ));
-          } else {
-            main[0].children.push(this.findChilds(
-              child.uuid, 
-              data, 
-              {name: '', attributes: {}, children: []}, 
-              req.body.encounterPart_uuid
-            ));
-          }
+          main.push(this.findChilds(child.uuid, data, {name: '', id: child.uuid, nodeSvgShape, attributes: {}, children: []}));
         });
 
         res.status(200).send(main);
@@ -109,32 +111,26 @@ class Story {
 
   }
   
-  findChilds(parentUUID, total, obj, currNodeUuid) {
+  findChilds(parentUUID, total, obj) {
     const newObj = [];
     const curChildren = total.filter(child => child.follows === parentUUID);
+    const nodeSvgShape = {
+      shape: 'rect',
+      shapeProps: {
+        width:15,
+        height:10,
+        x:-7.5,
+        y:-5,
+        fill: '#888',
+        strokeWidth:0
+      }
+    };
 
     if(curChildren.length > 0) {
       curChildren.forEach(child => {
-        if(child.uuid === currNodeUuid) {
-          newObj.push(
-            this.findChilds(
-              child.uuid, 
-              total, 
-              {name: '', attributes: {}, nodeSvgShape: { shapeProps: { fill: 'blue', width: 15, height: 10, x:-7.5, y:-5, fill: '#37d498', strokeWidth:0 }}, children: []}, 
-              currNodeUuid
-            ));
-        } else {
-          newObj.push(
-            this.findChilds(
-              child.uuid, 
-              total, 
-              {name: '', attributes: {}, children: []}, currNodeUuid
-            ));
-        }
+        newObj.push(this.findChilds(child.uuid, total, {name: '', id: child.uuid, nodeSvgShape, attributes: {}, children: []}));
       });
-
       obj.children = newObj;
-
     }
   
     return obj;

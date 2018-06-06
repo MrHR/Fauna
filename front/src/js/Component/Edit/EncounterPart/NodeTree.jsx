@@ -1,21 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'glamor';
-import Tree from 'react-d3-tree';
+import { Tree, treeUtil}  from 'react-d3-tree';
 
 import { EncounterPartSelectActive, EncounterPartGetNodeTree } from './../../../Actions/EncounterPartActions'
-
-const svgSquare = {
-  shape: 'rect',
-  shapeProps: {
-    width:15,
-    height:10,
-    x:-7.5,
-    y:-5,
-    fill: '#888',
-    strokeWidth:0
-  }
-}
 
 const containerStyles = {
   width: '100%',
@@ -28,11 +16,17 @@ const styling = {
   }
 }
 
+let tempTree = null;
+
 class NodeTree extends Component {
 
 	constructor(props) {
     super(props)
-    this.state = {};
+    this.state = {
+      tree: null
+    };
+
+    this.findChild = this.findChild.bind(this);
   }
 
   componentDidMount() {
@@ -44,16 +38,39 @@ class NodeTree extends Component {
       }
     });
   }
+
+  componentWillReceiveProps() {
+
+    if(this.props.encounterParts.nodeTree) {
+      this.setState(
+        { tree: this.props.encounterParts.nodeTree},
+        () => {
+          tempTree = this.state.tree;
+          this.findChild(tempTree[0], this.props.encounterParts.active)
+        }
+      );
+    }
+  }
+
+  findChild(child, currChildID) {
+    if(child.id !== currChildID) {
+      child.nodeSvgShape.shapeProps.fill = '#888';
+      child.children.forEach(child => this.findChild(child, currChildID))
+    } else {
+      child.nodeSvgShape.shapeProps.fill = '#37d498';
+    }
+
+    this.setState({tree: tempTree});
+    return false;
+  }
   
 	render() {
-    console.log('node tree',this.props.encounterParts.nodeTree )
 		return (
       <div style={containerStyles} ref={tc => (this.treeContainer = tc)}>
-        { this.props.encounterParts.nodeTree ? 
+        { (tempTree) ? 
           <Tree 
-            data={this.props.encounterParts.nodeTree} 
+            data={tempTree} 
             orientation={'vertical'} 
-            nodeSvgShape={svgSquare}
             pathFunc={'elbow'}
             collapsible={false}
             zoomable={false}

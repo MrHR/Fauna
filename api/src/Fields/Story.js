@@ -3,17 +3,17 @@ const uuidV1 = require('uuid/v1');
 
 class Story {
 
-  constructor( app, pg ) {
+  constructor(app, pg ) {
 
     app.get('/story', async(req, res, next) => {
       pg.select('*').table('story').then((data) => {
-        res.send(200, { data: data})
+        res.status(200).send({ data: data})
       })
     });
 
     app.get('/story/:uuid', async(req, res, next) => {
       pg.select('*').table('story').where({uuid: req.params.uuid}).then((data) => {
-        res.send(200, data[0])
+        res.status(200).send(data[0])
       })
     });
 
@@ -26,18 +26,18 @@ class Story {
       }
       
       pg.insert(toInsert).table('story').returning(["uuid", "title", "description"]).then((result) => {
-        res.send(200, { created: result[0]});
+        res.status(200).send({ created: result[0]});
       }).catch((error) => {
-        res.send(400, { message: error })
+        res.status(400).send({ message: error })
       });
       
     });
 
     app.post('/story/:uuid', async(req, res, next) => {
       pg.del().table('story').where({uuid: req.params.uuid}).then((result) => {
-        res.send(200, { created: result[0]})
+        res.status(200).send({ created: result[0]})
       }).catch((error) => {
-        res.send(400, { message: error })
+        res.status(400).send({ message: error })
       })
     });
 

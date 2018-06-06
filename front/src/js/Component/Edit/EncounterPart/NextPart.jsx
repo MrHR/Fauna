@@ -12,7 +12,7 @@ class NextPart extends Component {
 	}
 
 	handleClick() {
-		this.props.selectEncounterPart(this.props.data.uuid)
+		this.props.selectEncounterPart(this.props.data.uuid, this.props.data)
 	}
 	render() {
 		return (
@@ -37,7 +37,7 @@ export default connect(
 	}, 
 	dispatch => {
 		return {
-			selectEncounterPart: (id) => dispatch(EncounterPartSelectActive(id))
+			selectEncounterPart: (id, data) => dispatch(EncounterPartSelectActive(id, data))
 		}
 	}
 )(NextPart)

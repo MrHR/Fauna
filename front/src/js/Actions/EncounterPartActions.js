@@ -13,16 +13,18 @@ export const ENCOUNTER_PART_CREATE_ITEM_SUCCESS = 'ENCOUNTER_PART_CREATE_ITEM_SU
 export const ENCOUNTER_PART_CREATE_ITEM_FAILED = 'ENCOUNTER_PART_CREATE_ITEM_FAILED';
 
 export const ENCOUNTER_PART_SELECT_ACTIVE = 'ENCOUNTER_PART_SELECT_ACTIVE';
+export const ENCOUNTER_PART_SELECT_ACTIVE_SUCCESS = 'ENCOUNTER_PART_SELECT_ACTIVE_SUCCESS';
+export const ENCOUNTER_PART_SELECT_ACTIVE_FAILED = 'ENCOUNTER_PART_SELECT_ACTIVE_FAILED';
 
 export const ENCOUNTER_PART_GET_NODE_TREE = 'ENCOUNTER_PART_GET_NODE_TREE';
 export const ENCOUNTER_PART_GET_NODE_TREE_SUCCESS = 'ENCOUNTER_PART_GET_NODE_TREE_SUCCESS';
 export const ENCOUNTER_PART_GET_NODE_TREE_FAILED = 'ENCOUNTER_PART_GET_NODE_TREE_FAILED';
 
 
-export function EncounterPartFetchList(data) {
+export function EncounterPartFetchList(id) {
   return {
     type: ENCOUNTER_PART_FETCH_LIST,
-    data
+    id
   }
 }
 export function EncounterPartCreateItem(data) {
@@ -32,10 +34,11 @@ export function EncounterPartCreateItem(data) {
   }
 }
 
-export function EncounterPartSelectActive(id) {
+export function EncounterPartSelectActive(id, data) {
 	return {
-		type: ENCOUNTER_PART_SELECT_ACTIVE,
-		id
+    type: ENCOUNTER_PART_SELECT_ACTIVE,
+    id,
+		data
 	}
 }
 

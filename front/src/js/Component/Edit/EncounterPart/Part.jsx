@@ -38,7 +38,7 @@ class Part extends Component {
 	}
 
 	handleBack() {
-		this.props.selectEncounterPart(this.props.data.follows)
+		this.props.selectEncounterPart(this.props.data.follows, this.props.data)
 	}
 
 	render() {
@@ -52,20 +52,24 @@ class Part extends Component {
 		
 		return (
 			<div>
-				{ this.props.data.uuid !== this.props.encounter.detail.start_encounter_part_uuid ?
-					<a {...link} onClick={this.handleBack}>&nbsp;back</a> : null 
+				{ this.props.encounter.detail ?
+						this.props.data.uuid !== this.props.encounter.detail.start_encounter_part_uuid ?
+							<a {...link} onClick={this.handleBack}>&nbsp;back</a> : null 
+					: null
 				}
 
 				<div {...text}>
 					{this.props.data.story_text}
 				</div>
 
-				<CreateFollow/>
-
 				<h4>Encounter Parts</h4>
 				<ul>
 					{following}
 				</ul>
+
+				<CreateFollow/>
+
+				
 				
 			</div>
 		)
@@ -82,7 +86,7 @@ export default connect(
 	}, 
 	dispatch => {
 		return {
-			selectEncounterPart: (id) => dispatch(EncounterPartSelectActive(id))
+			selectEncounterPart: (id, data) => dispatch(EncounterPartSelectActive(id, data))
 		}
 	}
 )(Part)
