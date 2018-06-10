@@ -10,9 +10,9 @@
     "leaflet": "1.0.3",
     "lodash": "4.17.4",
     "node-sass": "4.5.2",
-    "react": "16.0.0",
+    "react": "^15.4.2",
     "react-d3-tree": "^1.10.6",
-    "react-dom": "15.4.2",
+    "react-dom": "^15.4.2",
     "react-hammerjs": "1.0.1",
     "react-leaflet": "1.1.4",
     "react-leaflet-div-icon": "1.0.2",
@@ -24,8 +24,7 @@
     "redux-logger": "3.0.1",
     "redux-saga": "0.16.0",
     "redux-thunk": "2.2.0",
-    "clipboard": "2.0.1",
-    "connected-react-router": "4.3.0"
+    "clipboard": "2.0.1"
   },
   "devDependencies": {
     "eslint": "3.19.0",

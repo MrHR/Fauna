@@ -1,5 +1,4 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import { push } from 'connected-react-router';
 import Auth from './../Modules/Auth'
 import axios from 'axios';
 
