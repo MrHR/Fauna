@@ -7,11 +7,13 @@ import Hammer from 'react-hammerjs';
 
 
 import { StoryFetchList } from './../../../Actions/StoryActions'
-import { StoryDeleteItem } from './../../../Actions/StoryActions'
+import { StoryDeleteItem, ReadModeToggle } from './../../../Actions/StoryActions'
 import ListItem from './ListItem'
 import CreateApp from './../../Create/CreateApp';
 import trash from '../../../../../public/images/icon_trash.png';
 import Menu from '../../General/ListMenu';
+import icon_read from './../../../../../public/images/icon_read.svg';
+import icon_edit from './../../../../../public/images/icon_edit.svg';
 
 const Stories = css({
 	'> a': {
@@ -69,18 +71,30 @@ const listTools = css({
 	}
 })
 
+const readLink = css({
+	textDecoration: 'none',
+	color:'black',
+	'> img': {
+		width:'15px',
+		display:'inline-block',
+		float:'left'
+	}
+})
+
 class StoryList extends Component {
 	constructor() {
 		super();
 
 		this.state = {
 			showSelectBoxes: false,
-			selectedStories: []
+			selectedStories: [],
+			readMode: false
 		}
 
 		this.handleDelete = this.handleDelete.bind(this)
 		this.handleSelectClick = this.handleSelectClick.bind(this)
 		this.handleInputChange = this.handleInputChange.bind(this)
+		this.toggleReadMode = this.toggleReadMode.bind(this)
 	}
 
 	componentDidMount() {
@@ -130,25 +144,50 @@ class StoryList extends Component {
 				selectedStories: array
 			});
 		}
-  }
+	}
+	
+	toggleReadMode() {
+		this.setState({
+			readMode:!this.state.readMode
+		})
+
+		this.props.toggleReadMode();
+	}
 
 	render() {
 		return (
 			<div className={'page'}>
 				<h2>Stories</h2>
 
-				<div id="listTools" {...listTools}>
-						<button className="btnDelete" onClick={this.handleDelete}>
-							<img src={trash} alt="icon trash"/>
-						</button>
+				<div id="listTools" {...listTools}>		
+					<button className="btnDelete" onClick={this.handleDelete}>
+						<img src={trash} alt="icon trash"/>
+					</button>
 				</div>
 
 				<Menu>
-					{ this.state.showSelectBoxes ?
-						<div onClick={this.handleSelectClick}>Unselect</div>
+					<div>
+						{ !this.props.story.readMode ? 
+							(this.state.showSelectBoxes ?
+								<div onClick={this.handleSelectClick}>Clear selection</div>
+								:
+								<div onClick={this.handleSelectClick} >Select</div>
+							)
+							: null
+						}
+	
+						{!this.state.readMode ? 
+							<div onClick={this.toggleReadMode}>
+								<img src={icon_read} alt={"icon read"}/>
+								Read Mode
+							</div>
 						:
-						<div onClick={this.handleSelectClick} >Select</div>
-					}
+							<div onClick={this.toggleReadMode}>
+								<img src={icon_edit} alt={"icon read"}/>
+								Edit Mode
+							</div>
+						}
+					</div>
 				</Menu>
 
 				<ul>
@@ -166,9 +205,12 @@ class StoryList extends Component {
 						</ListItem>
 					})}
 
-					<li>
-						<Link to={'/Create'} className="button">+</Link>
-					</li>
+					{!this.props.story.readMode ?
+						<li>
+							<Link to={'/Create'} className="button">+</Link>
+						</li>
+						:null
+					}
 
 				</ul>
 
@@ -186,7 +228,8 @@ export default connect(
 	dispatch => {
 		return {
 			fetchList: (data) => { dispatch(StoryFetchList(data)) },
-			deleteItem: (id) => { dispatch(StoryDeleteItem(id) )}
+			deleteItem: (id) => { dispatch(StoryDeleteItem(id) )},
+			toggleReadMode: () => { dispatch(ReadModeToggle() )}
 		}
 	}
 )(StoryList)

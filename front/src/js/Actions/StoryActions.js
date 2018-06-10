@@ -20,6 +20,8 @@ export const STORY_UPDATE_ITEM = 'STORY_UPDATE_ITEM';
 export const STORY_UPDATE_ITEM_SUCCESS = 'STORY_UPDATE_ITEM_SUCCESS';
 export const STORY_UPDATE_ITEM_FAILED = 'STORY_UPDATE_ITEM_FAILED';
 
+export const READ_MODE_TOGGLE = 'READ_MODE_TOGGLE';
+
 
 export function StoryFetchList(data) {
   return {
@@ -52,5 +54,11 @@ export function StoryUpdateItem(data) {
   return {
     type: STORY_UPDATE_ITEM,
     data
+  }
+}
+
+export function ReadModeToggle() {
+  return {
+    type: READ_MODE_TOGGLE
   }
 }

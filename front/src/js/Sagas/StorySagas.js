@@ -63,7 +63,7 @@ function* storyUpdateItem(action) {
 function* storyDeleteItem(action) {
   try {
     const result = yield axios({
-      method:'post',
+      method:'delete',
       headers: { Authorization: `${Auth.getToken()}` },
       url:`${process.env.REACT_APP_API_URL}/story/${action.uuid}`
     })

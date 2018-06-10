@@ -21,6 +21,15 @@ export const ENCOUNTER_PART_GET_NODE_TREE_SUCCESS = 'ENCOUNTER_PART_GET_NODE_TRE
 export const ENCOUNTER_PART_GET_NODE_TREE_FAILED = 'ENCOUNTER_PART_GET_NODE_TREE_FAILED';
 
 
+export const ENCOUNTER_PART_UPDATE_ITEM = 'ENCOUNTER_PART_UPDATE_ITEM';
+export const ENCOUNTER_PART_UPDATE_ITEM_SUCCESS = 'ENCOUNTER_PART_UPDATE_ITEM_SUCCESS';
+export const ENCOUNTER_PART_UPDATE_ITEM_FAILED = 'ENCOUNTER_PART_UPDATE_ITEM_FAILED';
+
+export const ENCOUNTER_PART_INIT_UPDATE = 'ENCOUNTER_PART_INIT_UPDATE';
+export const ENCOUNTER_PART_INIT_UPDATE_SUCCESS = 'ENCOUNTER_PART_INIT_UPDATE_SUCCESS';
+export const ENCOUNTER_PART_INIT_UPDATE_FAILED = 'ENCOUNTER_PART_INIT_UPDATE_FAILED';
+
+
 export function EncounterPartFetchList(id) {
   return {
     type: ENCOUNTER_PART_FETCH_LIST,
@@ -45,6 +54,20 @@ export function EncounterPartSelectActive(id, data) {
 export function EncounterPartGetNodeTree(id) {
   return {
     type: ENCOUNTER_PART_GET_NODE_TREE,
+    id
+  }
+}
+
+export function EncounterPartUpdateItem(data) {
+  return {
+    type: ENCOUNTER_PART_UPDATE_ITEM,
+    data
+  }
+}
+
+export function EncounterPartInitUpdate(id) {
+  return {
+    type: ENCOUNTER_PART_INIT_UPDATE,
     id
   }
 }

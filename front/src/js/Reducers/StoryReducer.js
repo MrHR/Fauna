@@ -18,7 +18,9 @@ import {
 
 	STORY_UPDATE_ITEM,
 	STORY_UPDATE_ITEM_SUCCESS,
-	STORY_UPDATE_ITEM_FAILED
+	STORY_UPDATE_ITEM_FAILED,
+	
+	READ_MODE_TOGGLE
 
 } from './../Actions/StoryActions';
 
@@ -27,7 +29,8 @@ const initialState = {
 	created: null,
 	loading: false,
 	detail: null,
-	deleted: null
+	deleted: null,
+	readMode: false
 }
 
 export function StoryReducer(state = initialState, action) {
@@ -94,6 +97,13 @@ export function StoryReducer(state = initialState, action) {
 			return {
 				...state,
 				detail: action.data,
+				loading: false
+			}
+
+		case READ_MODE_TOGGLE:
+			return {
+				...state,
+				readMode: !state.readMode,
 				loading: false
 			}
 

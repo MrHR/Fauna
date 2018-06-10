@@ -19,9 +19,6 @@ class NextPart extends Component {
 			<li className={'listItem'} onClick={this.handleClick}>
 				<a>
 					<h3>{this.props.data.cta}</h3>
-					<p>
-						{this.props.data.story_text}
-					</p>
 				</a>
 			</li>
 

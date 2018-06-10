@@ -31,15 +31,20 @@ const menu = css({
   right:'0',
   top:'0',
   width:'140px',
-  textAlign:'center',
+  textAlign:'right',
   boxSizing:'border-box',
-  '> div': {
+  '> div div': {
     padding:'10px 5px',
     borderTop:'1px solid #ddd',
     borderBottom:'1px solid #ddd',
-    cursor:'pointer'
+    cursor:'pointer',
+    '> img': {
+      width:'15px',
+      display:'inline-block',
+      float:'left'
+    }
   }, 
-  '> div:hover': {
+  '> div div:hover': {
     backgroundColor:'#eee'
   }
 })

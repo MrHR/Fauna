@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { css } from 'glamor';
+import { connect } from 'react-redux';
 
 import icon_edit from '../../../../../public/images/icon_edit.svg';
 
@@ -34,7 +35,7 @@ const editButton = css({
 	}
 })
 
-export default class ListItem extends Component {
+class ListItem extends Component {
 	constructor(props) {
 		super(props);
 	}
@@ -50,11 +51,25 @@ export default class ListItem extends Component {
 						<p>{this.props.data.description}</p>
 					</Link>
 
-					<Link {...editButton} to={`/Create/${this.props.data.uuid}`}>
-						<img {...edit} src={icon_edit} alt="icon edit"/>
-					</Link>
+					{!this.props.story.readMode ? 
+						<Link {...editButton} to={`/Create/${this.props.data.uuid}`}>
+							<img {...edit} src={icon_edit} alt="icon edit"/>
+						</Link>
+						:null}
 					
 				</li>
 		)
 	}
 }
+
+export default connect(
+	state => {
+		return {
+			story: state.story
+		}
+	},
+	dispatch => {
+		return {
+		}
+	}
+)(ListItem)

@@ -25,6 +25,7 @@ class ReadApp extends Component {
       <div {...Container}>
         <div {...StoryCreaterContainer}>
           <Route path={'/'} exact component={ListApp} />
+          {/* <Route path={'/preview'} exact com */}
         </div>
       </div>
     )

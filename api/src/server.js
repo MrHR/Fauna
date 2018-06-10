@@ -103,9 +103,9 @@ class App {
 
   async initialiseTables() {
 
-    // await this.pg.schema.dropTableIfExists('users').then(console.log("dropped users"));
-    // await this.pg.schema.dropTableIfExists('character').then(console.log("dropped character"));
-    // await this.pg.schema.dropTableIfExists('tokens').then(console.log("dropped tokens"));
+    //await this.pg.schema.dropTableIfExists('users').then(console.log("dropped users"));
+    //await this.pg.schema.dropTableIfExists('character').then(console.log("dropped character"));
+    //await this.pg.schema.dropTableIfExists('tokens').then(console.log("dropped tokens"));
     // await this.pg.schema.dropTableIfExists('encounter').then(console.log("dropped encounter"));
     // await this.pg.schema.dropTableIfExists('encounter_part').then(console.log("dropped encounter part"));
     // await this.pg.schema.dropTableIfExists('encounter_action').then(console.log("dropped encounter action"));
@@ -154,7 +154,7 @@ class App {
       table.string("title");
       table.string("character_uuid");
       table.string("description");
-      table.string("start_part_uuid");
+      table.uuid("start_part_uuid");
       table.timestamps(true, true);
     }).then(function () {
       console.log("created Story");
@@ -166,7 +166,7 @@ class App {
       table.uuid("story_uuid");
       table.string("character_uuid");
       table.string("description");
-      table.string("start_encounter_part_uuid");
+      table.uuid("start_encounter_part_uuid");
       table.timestamps(true, true);
     }).then(function () {
       console.log("created Encounter");
@@ -175,7 +175,7 @@ class App {
     await this.pg.schema.createTableIfNotExists('encounter_part', function (table){
       table.increments();
       table.uuid("uuid");
-      table.string("encounter_uuid");
+      table.uuid("encounter_uuid");
       table.text("story_text", "longtext");
       table.string("follows");
       table.string("cta");
@@ -188,7 +188,7 @@ class App {
     await this.pg.schema.createTableIfNotExists('encounter_action', function (table){
       table.increments();
       table.uuid("uuid");
-      table.string("encounter_part_uuid");
+      table.uuid("encounter_part_uuid");
       table.string("start_uuid");
       table.string("story_text");
       table.timestamps(true, true);
@@ -201,7 +201,7 @@ class App {
       table.uuid("uuid");
       table.string("character_uuid");
       table.string("description");
-      table.string("start_part_uuid");
+      table.uuid("start_part_uuid");
       table.timestamps(true, true);
     }).then(function () {
       console.log("created combat");
@@ -212,8 +212,8 @@ class App {
       table.uuid("uuid");
       table.string("story_text");
       table.string("description");
-      table.string("combat_part_uuid");
-      table.string("encounter_uuid");
+      table.uuid("combat_part_uuid");
+      table.uuid("encounter_uuid");
       table.timestamps(true, true);
     }).then(function () {
       console.log("created combat part");

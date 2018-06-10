@@ -17,7 +17,15 @@ import {
 	ENCOUNTER_PART_SELECT_ACTIVE_FAILED,
 
 	ENCOUNTER_PART_GET_NODE_TREE,
-	ENCOUNTER_PART_GET_NODE_TREE_SUCCESS
+	ENCOUNTER_PART_GET_NODE_TREE_SUCCESS,
+
+	ENCOUNTER_PART_INIT_UPDATE,
+	ENCOUNTER_PART_INIT_UPDATE_SUCCESS,
+	ENCOUNTER_PART_INIT_UPDATE_FAILED,
+
+	ENCOUNTER_PART_UPDATE_ITEM,
+	ENCOUNTER_PART_UPDATE_ITEM_SUCCESS,
+	ENCOUNTER_PART_UPDATE_ITEM_FAILED,
 
 } from './../Actions/EncounterPartActions';
 
@@ -106,6 +114,35 @@ export function EncounterPartsReducer(state = initialState, action) {
 					loading: false,
 					nodeTree:	action.data
 				}	
+
+			case ENCOUNTER_PART_INIT_UPDATE:
+				return {
+					...state,
+					loading: true
+				}	
+	
+			case ENCOUNTER_PART_INIT_UPDATE_SUCCESS:
+				return {
+					...state,
+					loading: false,
+					update: action.id
+				}	
+	
+			case ENCOUNTER_PART_UPDATE_ITEM:
+				return {
+					...state,
+					loading: true,
+					created: null,
+					detail: null
+				}	
+	
+			case ENCOUNTER_PART_UPDATE_ITEM_SUCCESS:
+				return {
+					...state,
+					loading:false,
+					detail: null,
+					update: null
+				}
 
 		default: 
 			return state;

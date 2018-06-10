@@ -9,28 +9,10 @@ import { EncounterPartFetchList } from './../../../Actions/EncounterPartActions'
 import { EncounterFetchItem } from './../../../Actions/EncounterActions';
 import { StoryFetchItem } from './../../../Actions/StoryActions';
 import NodeTree from './NodeTree';
+import UuidCopy from './../../General/UuidCopy';
 
 const Header = css({
 	display:'inline-block'
-})
-
-const formField = css({
-	display: 'block',
-	marginBottom: '10px',
-	'> input': {
-		width: '100px',
-		height :'30px',
-		lineHeight :'30px',
-		backgroundColor: '#fff',
-		display: 'block',
-		border: '1px solid #333'
-	}
-})
-const part = css({
-	backgroundColor: '#fff',
-	margin: 'auto',
-	padding: '50px',
-	marginBottom: '30px'
 })
 
 class EncounterPartApp extends Component {
@@ -46,8 +28,6 @@ class EncounterPartApp extends Component {
 
 	render() {
 
-		//console.log('parts', this.props.encounterParts);
-
 		const { list } = this.props.encounterParts;
 		const display = list.map((index, key) => {
 			if(this.props.encounterParts.active && index.uuid === this.props.encounterParts.active){
@@ -58,8 +38,15 @@ class EncounterPartApp extends Component {
 		return (
 			<div>
 				<h3 {...Header}>{this.props.story.detail ? this.props.story.detail.title : '(Loading)'}</h3>
-				<NodeTree/>
+
+				{!this.props.story.readMode ? <NodeTree/> : null}
+
+				{this.props.encounter.detail && !this.props.story.readMode ? 
+					<UuidCopy uuidName={'encounter uuid:'}>{this.props.encounter.detail.uuid}</UuidCopy>
+				:null}
+
 				{display}
+				
 			</div>
 		)
 	}
