@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css, select } from 'glamor';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom'
 import '../../../../css/style.css';
-import Hammer from 'react-hammerjs';
 
 
 import { StoryFetchList } from './../../../Actions/StoryActions'
 import { StoryDeleteItem, ReadModeToggle } from './../../../Actions/StoryActions'
+import { userLogout } from './../../../Actions/UserActions';
 import ListItem from './ListItem'
 import CreateApp from './../../Create/CreateApp';
 import trash from '../../../../../public/images/icon_trash.png';
@@ -95,6 +96,7 @@ class StoryList extends Component {
 		this.handleSelectClick = this.handleSelectClick.bind(this)
 		this.handleInputChange = this.handleInputChange.bind(this)
 		this.toggleReadMode = this.toggleReadMode.bind(this)
+		this.handleLogout = this.handleLogout.bind(this)
 	}
 
 	componentDidMount() {
@@ -154,6 +156,10 @@ class StoryList extends Component {
 		this.props.toggleReadMode();
 	}
 
+	handleLogout() {
+		this.props.logout();
+	}
+
 	render() {
 		return (
 			<div className={'page'}>
@@ -187,6 +193,11 @@ class StoryList extends Component {
 								Edit Mode
 							</div>
 						}
+
+						<div onClick={this.handleLogout}>
+							Logout
+						</div>
+
 					</div>
 				</Menu>
 
@@ -219,7 +230,7 @@ class StoryList extends Component {
 	}
 }
 
-export default connect(
+export default withRouter(connect(
 	state => {
 		return {
 			story: state.story
@@ -229,7 +240,8 @@ export default connect(
 		return {
 			fetchList: (data) => { dispatch(StoryFetchList(data)) },
 			deleteItem: (id) => { dispatch(StoryDeleteItem(id) )},
-			toggleReadMode: () => { dispatch(ReadModeToggle() )}
+			toggleReadMode: () => { dispatch(ReadModeToggle() )},
+			logout: (data) => { dispatch( userLogout(data) )}
 		}
 	}
-)(StoryList)
+)(StoryList))

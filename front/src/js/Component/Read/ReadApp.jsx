@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { css } from 'glamor'
 import { connect } from 'react-redux'
 import { Router, Route } from 'react-router'
+import { withRouter } from 'react-router-dom'
 
 import ListApp  from './List/ListApp'
 
@@ -32,7 +33,7 @@ class ReadApp extends Component {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   state => {
     return {
       story: state.story
@@ -41,4 +42,4 @@ export default connect(
   dispatch => {
     return {}
   }
-)(ReadApp)
+)(ReadApp))

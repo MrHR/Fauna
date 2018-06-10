@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'glamor';
+import { withRouter } from 'react-router-dom';
 
 const part = css({
 	backgroundColor: '#fff',
@@ -19,7 +20,7 @@ class TitleApp extends Component {
 	}
 }
 
-export default connect(
+export default withRouter(connect(
 	state => {
 		return {
 			story: state.story
@@ -29,4 +30,4 @@ export default connect(
 		return {
 		}
 	}
-)(TitleApp)
+)(TitleApp))

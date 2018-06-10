@@ -103,7 +103,7 @@ class Story {
     });
 
     //update encounter
-    app.patch('/encounter', async(req, res, next) => {
+    app.patch('/encounter', requiresLogin, async(req, res, next) => {
       //console.log("\x1b[35m", req.body)
 
       const start = req.body.start;
@@ -175,7 +175,7 @@ class Story {
     });
 
     //delete encounter
-    app.del('/encounter/:uuid', requiresLogin, async(req, res, next) => {
+    app.delete('/encounter/:uuid', requiresLogin, async(req, res, next) => {
 
       console.log('params ',req.params)
 

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { css } from 'glamor';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import icon_edit from '../../../../../public/images/icon_edit.svg';
 
@@ -62,7 +63,7 @@ class ListItem extends Component {
 	}
 }
 
-export default connect(
+export default withRouter(connect(
 	state => {
 		return {
 			story: state.story
@@ -72,4 +73,4 @@ export default connect(
 		return {
 		}
 	}
-)(ListItem)
+)(ListItem))

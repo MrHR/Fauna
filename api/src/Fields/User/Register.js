@@ -8,9 +8,16 @@ class Register {
       const toInsert = req.body;
       toInsert['uuid'] = uuidV1()
       toInsert['password'] = md5(toInsert['password'])
+
+      console.log("register body", req.body);
+
       await pg.insert(toInsert).table('users').then((data) => {
         res.status(200).send(data)
       })
+      .catch((error) => {
+        res.status(400).send(error.message)
+      })
+      
     })
   }
 }

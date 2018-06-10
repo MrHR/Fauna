@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { userLogin } from './../../Actions/UserActions';
 
@@ -13,7 +14,14 @@ class LoginApp extends Component {
       username: null,
       password: null
     }
-  }
+	}
+	
+	componentWillReceiveProps(newProps) {
+		if(newProps.user.registered) {
+			this.props.history.push('/')
+		}
+	}
+
 	handleSubmit() {
 		const data = this.state;
 		this.props.login(data)
@@ -23,9 +31,11 @@ class LoginApp extends Component {
 		const curState = this.state;
 		curState[e.target.name] = e.target.value;
 	}
+	
   render() {
     return (
-      <div>
+      <div className={"page"}>
+			<h1>Login</h1>
 				<div>
 					<label htmlFor={'username'}>Email</label>
 					<input type="email" name="username" onChange={(e) => this.handleChange(e) } placeholder={'email'} />
@@ -34,15 +44,16 @@ class LoginApp extends Component {
 					<label htmlFor={'password'}>Password</label>
 					<input type="password" name="password" onChange={(e) => this.handleChange(e) } placeholder={'Password'} />
 				</div>
-        <a onClick={this.handleSubmit}>Submit</a>
+        <button className={'button'} onClick={this.handleSubmit}>Submit</button>
         <Link to={'/register'}> Register </Link>
       </div>
     )
   }
 }
-export default connect(
+export default withRouter(connect(
 	state => {
 		return {
+			user: state.user
 		}
 	}, 
 	dispatch => {
@@ -50,4 +61,4 @@ export default connect(
 			login: (data) => { dispatch( userLogin(data) )}
 		}
 	}
-)(LoginApp)
+)(LoginApp))

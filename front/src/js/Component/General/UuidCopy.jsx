@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { css } from 'glamor';
 import Clipboard from 'clipboard';
+import { withRouter } from 'react-router-dom';
 
 import icon_copy from './../../../../public/images/icon_copy.svg';
 
@@ -14,6 +15,7 @@ const uuidCopy = css({
     position:'relative',
     top:'-10px',
 		display:'flex',
+		justifyContent:'space-between',
 		alignItems:'center',
 		width:'100%',
 		maxWidth:'290px',
@@ -72,10 +74,10 @@ class UuidCopy extends Component {
 	}
 
   render() {
-		console.log('props', this.props)
     return (
       <div {...uuidCopy}>
-        <button id={'cmdCopy'}><img src={icon_copy} alt={'copy icon'} />
+        <button id={'cmdCopy'}>
+					<img src={icon_copy} alt={'copy icon'} />
           <span><b>{this.props.uuidName}</b>&nbsp;</span>
           <span id={'txtCopyValue'}>{this.props.children}</span>
         </button>

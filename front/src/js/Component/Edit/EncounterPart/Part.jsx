@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'glamor';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { EncounterPartSelectActive, EncounterPartInitUpdate } from './../../../Actions/EncounterPartActions'
 
@@ -15,7 +16,7 @@ const text = css({
 	padding:'40px 0',
 	fontFamily:'Lora',
 	backgroundColor:'#ddd',
-	padding:'40px 20px 30px 20px',
+	padding:'40px 20px 0 20px',
 	position:'relative',
 	':hover': {
 		'> button': {
@@ -144,7 +145,7 @@ class Part extends Component {
 	}
 }
 
-export default connect(
+export default withRouter(connect(
 	state => {
 		return {
 			story: state.story,
@@ -158,4 +159,4 @@ export default connect(
 			initUpdate: (id) => { dispatch(EncounterPartInitUpdate(id))}
 		}
 	}
-)(Part)
+)(Part))

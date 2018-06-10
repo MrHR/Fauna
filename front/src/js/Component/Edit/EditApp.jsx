@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'glamor';
+import { withRouter } from 'react-router-dom';
+
+import Menu from './../General/ListMenu';
+
+import { userLogout } from './../../Actions/UserActions';
 
 
 
@@ -21,12 +26,32 @@ const Container = css({
 class EditApp extends Component {
 	constructor() {
 		super()
+
+		this.handleClick = this.handleClick.bind(this);
+
 	}
+
+	handleClick() {
+		this.props.logout();
+	}
+
 	render() {
 		return (
 			<div className="page" {...Container}>
 				<span>
-					<h1>Edit Storyline</h1>			
+					<h1>Edit Storyline</h1>		
+					<Menu>
+						<div>
+							<Link to={'/'}>Home</Link>
+	
+							<div onClick={this.handleClick}>
+								Logout
+							</div>
+							
+						</div>
+
+					</Menu>	
+
 					<switch>
 						<Route path={`/edit/:uuid/:encounter_uuid`} exact component={EncounterPartApp} />	
 						<Route path={`/edit/:uuid`} exact component={EncounterApp} />	
@@ -37,7 +62,7 @@ class EditApp extends Component {
 	}
 }
 
-export default connect(
+export default withRouter(connect(
 	state => {
 		return {
 			story: state.story
@@ -45,6 +70,7 @@ export default connect(
 	}, 
 	dispatch => {
 		return {
+			logout: (data) => { dispatch( userLogout(data) )}
 		}
 	}
-)(EditApp)
+)(EditApp))

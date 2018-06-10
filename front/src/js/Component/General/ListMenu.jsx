@@ -33,7 +33,10 @@ const menu = css({
   width:'140px',
   textAlign:'right',
   boxSizing:'border-box',
-  '> div div': {
+  '> div div, > div a': {
+    display:'block',
+    textDecoration:'none',
+    color:'#666',
     padding:'10px 5px',
     borderTop:'1px solid #ddd',
     borderBottom:'1px solid #ddd',
@@ -44,7 +47,7 @@ const menu = css({
       float:'left'
     }
   }, 
-  '> div div:hover': {
+  '> div div:hover, > div a:hover': {
     backgroundColor:'#eee'
   }
 })

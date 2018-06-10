@@ -3,14 +3,13 @@
 import createBrowserHistory from 'history/createBrowserHistory';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { css } from 'glamor';
 import { Provider } from 'react-redux';
 import { Router, Route } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import './css/style.css';
 import createSagaMiddleware from 'redux-saga'
+import { connectRouter, routerMiddleware } from 'connected-react-router'
 
 import filter from './js/functions/functions';
 import Reducers from './js/Reducers/'

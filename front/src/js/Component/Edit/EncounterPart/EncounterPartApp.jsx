@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'glamor';
 
-
-import Part from './Part'
-
 import { EncounterPartFetchList } from './../../../Actions/EncounterPartActions';
 import { EncounterFetchItem } from './../../../Actions/EncounterActions';
 import { StoryFetchItem } from './../../../Actions/StoryActions';
+
+import Part from './Part'
 import NodeTree from './NodeTree';
 import UuidCopy from './../../General/UuidCopy';
 

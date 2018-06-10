@@ -52,7 +52,7 @@ class Story {
     });
 
     //delete story
-    app.del('/story/:uuid', requiresLogin,  async(req, res, next) => {
+    app.delete('/story/:uuid', requiresLogin,  async(req, res, next) => {
       pg.del().table('story').where({uuid: req.params.uuid}).then((result) => {
         res.status(200).send({ created: result[0]})
       }).catch((error) => {
