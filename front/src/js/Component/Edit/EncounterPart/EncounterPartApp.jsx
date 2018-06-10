@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'glamor';
+import { withRouter } from 'react-router-dom';
 
 import { EncounterPartFetchList } from './../../../Actions/EncounterPartActions';
 import { EncounterFetchItem } from './../../../Actions/EncounterActions';
@@ -51,7 +52,7 @@ class EncounterPartApp extends Component {
 	}
 }
 
-export default connect(
+export default withRouter(connect(
 	state => {
 		return {
 			story: state.story,
@@ -66,4 +67,4 @@ export default connect(
 			fetchStoryItem: (data) => { dispatch( StoryFetchItem(data) )}
 		}
 	}
-)(EncounterPartApp)
+)(EncounterPartApp))

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'glamor';
+import { withRouter } from 'react-router-dom';
 
 import { EncounterCreateItem, EncounterFetchItem, EncounterUpdateItem } from './../../../Actions/EncounterActions'
 
@@ -58,7 +59,6 @@ class Create extends Component {
 
 	componentWillReceiveProps(newProps) {
 		if(newProps.encounter.detail) {
-			//console.log('new data', newProps.encounter)
 			this.setState({
 				update: newProps.encounter.detail.uuid || null,
 				description: newProps.encounter.detail.description || '',
@@ -74,7 +74,6 @@ class Create extends Component {
 		data['story_uuid'] = this.props.story.detail.uuid;
 
 		if(this.state.update) {
-			//console.log('uuid', this.props.encounter.detail.uuid)
 			data['uuid'] = this.props.encounter.detail.uuid
 			this.props.updateItem(data)
 		} else {
@@ -133,7 +132,7 @@ class Create extends Component {
 	}
 }
 
-export default connect(
+export default withRouter(connect(
 	state => {
 		return {
 			story: state.story,
@@ -147,4 +146,4 @@ export default connect(
 			fetchItem: (id) => { dispatch(EncounterFetchItem(id) )}
 		}
 	}
-)(Create)
+)(Create))

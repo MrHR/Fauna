@@ -33,7 +33,7 @@ class ReadApp extends Component {
   }
 }
 
-export default withRouter(connect(
+export default connect(
   state => {
     return {
       story: state.story
@@ -42,4 +42,4 @@ export default withRouter(connect(
   dispatch => {
     return {}
   }
-)(ReadApp))
+)(ReadApp)

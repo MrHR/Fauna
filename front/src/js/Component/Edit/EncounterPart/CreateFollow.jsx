@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'glamor';
+import { withRouter } from 'react-router-dom';
 
 import { EncounterPartCreateItem, EncounterPartUpdateItem } from './../../../Actions/EncounterPartActions'
 
@@ -128,7 +129,7 @@ class CreateFollow extends Component {
 	}
 }
 
-export default connect(
+export default withRouter(connect(
 	state => {
 		return {
 			story: state.story,
@@ -142,4 +143,4 @@ export default connect(
 			updateItem: (data) => { dispatch( EncounterPartUpdateItem(data) )},
 		}
 	}
-)(CreateFollow)
+)(CreateFollow))

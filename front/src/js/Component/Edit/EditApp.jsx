@@ -31,6 +31,12 @@ class EditApp extends Component {
 
 	}
 
+	componentWillReceiveProps(newProps) {
+		if(newProps.user.logout) {
+			this.props.history.push('/login')
+		}
+	}
+
 	handleClick() {
 		this.props.logout();
 	}
@@ -65,6 +71,7 @@ class EditApp extends Component {
 export default withRouter(connect(
 	state => {
 		return {
+			user: state.user,
 			story: state.story
 		}
 	}, 

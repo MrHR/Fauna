@@ -48,8 +48,8 @@ function* userLogout(action) {
     });
     Auth.deauthenticateUser()
     
+    //yield put(push('/login'));
     yield put({ type: USER_LOGOUT_SUCCESS, data: result.data });
-    yield put(push('/login'));
   } catch (e) {
     yield put({ type: USER_LOGOUT_FAILED, message: e.message });
   }

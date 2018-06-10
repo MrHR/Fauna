@@ -106,6 +106,12 @@ class StoryList extends Component {
 		console.log('process: ', process.env)
 	}
 
+	componentWillReceiveProps(newProps) {
+		if(newProps.user.logout) {
+			this.props.history.push('/login')
+		}
+	}
+
 	handleDelete(e) {
 		if(this.state.selectedStories.length > 0) { 
 			this.state.selectedStories.forEach((storyId) => {
@@ -115,11 +121,11 @@ class StoryList extends Component {
 	}
 
 	handleSelectClick() {
+		console.log('show trash icon')
+
 		this.setState(prevState => ({
 			showSelectBoxes:!prevState.showSelectBoxes
 		}))
-
-
 
 		if(this.state.showSelectBoxes) {
 			document.getElementById("listTools").classList.remove('slideLeft200');
@@ -230,10 +236,11 @@ class StoryList extends Component {
 	}
 }
 
-export default withRouter(connect(
+export default connect(
 	state => {
 		return {
-			story: state.story
+			story: state.story,
+			user: state.user
 		}
 	},
 	dispatch => {
@@ -244,4 +251,4 @@ export default withRouter(connect(
 			logout: (data) => { dispatch( userLogout(data) )}
 		}
 	}
-)(StoryList))
+)(StoryList)

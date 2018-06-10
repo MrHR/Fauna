@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'glamor';
+import { withRouter } from 'react-router-dom';
 
 import { EncounterPartSelectActive } from './../../../Actions/EncounterPartActions'
 
@@ -26,7 +27,7 @@ class NextPart extends Component {
 	}
 }
 
-export default connect(
+export default withRouter(connect(
 	state => {
 		return {
 			story: state.story
@@ -37,4 +38,4 @@ export default connect(
 			selectEncounterPart: (id, data) => dispatch(EncounterPartSelectActive(id, data))
 		}
 	}
-)(NextPart)
+)(NextPart))

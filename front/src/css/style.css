@@ -231,8 +231,8 @@ form input:focus, form textarea:focus {
 /*#region animation*/
 
 .slideLeft200 {
-    visibility: visible;
-    max-width:150px;
+    visibility: visible !important;
+    max-width:150px !important;
 }
 
 /*#endregion*/

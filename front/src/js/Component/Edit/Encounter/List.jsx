@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'glamor';
+import { withRouter } from 'react-router-dom';
 
 import { EncounterFetchList } from './../../../Actions/EncounterActions'
 import Item from './Item';
@@ -37,7 +38,7 @@ class List extends Component {
 	}
 }
 
-export default connect(
+export default withRouter(connect(
 	state => {
 		return {
 			story: state.story,
@@ -49,4 +50,4 @@ export default connect(
 			fetchList: (data) => { dispatch( EncounterFetchList(data) )}
 		}
 	}
-)(List)
+)(List))

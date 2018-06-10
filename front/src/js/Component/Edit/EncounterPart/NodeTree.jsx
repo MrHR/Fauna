@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'glamor';
 import { Tree, treeUtil}  from 'react-d3-tree';
+import { withRouter } from 'react-router-dom';
 
 import { EncounterPartSelectActive, EncounterPartGetNodeTree } from './../../../Actions/EncounterPartActions'
 
@@ -86,7 +87,7 @@ class NodeTree extends Component {
 	}
 }
 
-export default connect(
+export default withRouter(connect(
 	state => {
 		return {
       story: state.story,
@@ -98,4 +99,4 @@ export default connect(
 		return {
 		}
 	}
-)(NodeTree)
+)(NodeTree))
