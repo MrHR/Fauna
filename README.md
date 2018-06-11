@@ -1,12 +1,10 @@
-# Tell about me
-
+# Fauna
 ## Setup
 
 ```
 $ cp .env.template .env
 $ npm install
 ```
-
 
 ## Development
 
