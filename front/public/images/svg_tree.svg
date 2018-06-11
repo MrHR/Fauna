@@ -1,0 +1,22 @@
+<svg 
+  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 173.72 58">
+  <defs>
+    <style>.cls-1{fill:#383838;}.cls-2{fill:none;stroke:#b2b2b2;stroke-miterlimit:10;}</style>
+  </defs>
+  <title>svg_tree</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <rect class="cls-1" x="70.53" width="32.67" height="20"/>
+      <line class="cls-2" x1="86.03" y1="20" x2="86.03" y2="29.17" stroke="black"/>
+      <line class="cls-2" x1="86.03" y1="29" x2="86.03" y2="38.17" stroke="black"/>
+      <line class="cls-2" x1="86.03" y1="29" x2="86.03" y2="38.17" stroke="black"/>
+      <line class="cls-2" x1="157.38" y1="29" x2="157.38" y2="38.17" stroke="black"/>
+      <line class="cls-2" x1="16.33" y1="29" x2="16.33" y2="38.17" stroke="black"/>
+      <path class="cls-2" d="M15.83,28.58h0Z" stroke="black"/>
+      <path class="cls-2" d="M86.48,28.58h0Z" stroke="black"/>
+      <rect class="cls-1" x="70.53" y="38" width="32.67" height="20"/>
+      <rect class="cls-1" x="141.05" y="38" width="32.67" height="20"/>
+      <rect class="cls-1" y="38" width="32.67" height="20"/>
+    </g>
+  </g>
+</svg>
